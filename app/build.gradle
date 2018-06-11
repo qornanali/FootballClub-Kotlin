@@ -28,6 +28,8 @@ dependencies {
 
     //Android Library
     implementation "com.android.support:appcompat-v7:$android_lib_version"
+    implementation "com.android.support:recyclerview-v7:$android_lib_version"
+    implementation "com.github.bumptech.glide:glide:$glide_version"
 
     // Testing
     testImplementation 'junit:junit:4.12'
