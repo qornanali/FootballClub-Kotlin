@@ -24,6 +24,7 @@ class ListItemClubAdapter(val context: Context, val list: ArrayList<ItemClub> = 
             val bundle = Bundle()
             bundle.putSerializable("club", list.get(position))
             val i = Intent(context, DetailClubActivity::class.java)
+            i.putExtras(bundle)
             context.startActivity(i)
         })
     }
