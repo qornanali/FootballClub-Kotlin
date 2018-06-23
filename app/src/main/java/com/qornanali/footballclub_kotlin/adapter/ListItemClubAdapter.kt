@@ -1,8 +1,6 @@
 package com.qornanali.footballclub_kotlin.adapter
 
 import android.content.Context
-import android.content.Intent
-import android.os.Bundle
 import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
 import com.qornanali.footballclub_kotlin.detail_club.DetailClubActivity
@@ -10,7 +8,6 @@ import com.qornanali.footballclub_kotlin.holder.ItemClubHolder
 import com.qornanali.footballclub_kotlin.list_club.ItemClubUI
 import com.qornanali.footballclub_kotlin.model.ItemClub
 import org.jetbrains.anko.AnkoContext
-import org.jetbrains.anko.internals.AnkoInternals
 import org.jetbrains.anko.startActivity
 
 class ListItemClubAdapter(val context: Context, val list: ArrayList<ItemClub> = ArrayList<ItemClub>()) : RecyclerView.Adapter<ItemClubHolder>() {
@@ -21,7 +18,6 @@ class ListItemClubAdapter(val context: Context, val list: ArrayList<ItemClub> = 
 
     override fun onBindViewHolder(holder: ItemClubHolder, position: Int) {
         holder.bind(list.get(position))
-
         holder.itemView.setOnClickListener({ it ->
             context.startActivity<DetailClubActivity>("club" to list.get(position))
         })

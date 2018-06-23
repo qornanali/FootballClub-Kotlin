@@ -4,7 +4,6 @@ import com.qornanali.footballclub_kotlin.R
 import org.jetbrains.anko.*
 
 class DetailClubUI : AnkoComponent<DetailClubActivity> {
-
     override fun createView(ui: AnkoContext<DetailClubActivity>) = with(ui) {
         verticalLayout {
             toolbar {
