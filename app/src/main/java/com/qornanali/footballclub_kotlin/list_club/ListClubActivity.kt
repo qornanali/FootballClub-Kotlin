@@ -1,11 +1,10 @@
 package com.qornanali.footballclub_kotlin.list_club
 
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
-import android.widget.AdapterView
 import com.qornanali.footballclub_kotlin.R
 import com.qornanali.footballclub_kotlin.adapter.ListItemClubAdapter
+import com.qornanali.footballclub_kotlin.adapter.OnItemClickListener
 import com.qornanali.footballclub_kotlin.detail_club.DetailClubActivity
 import com.qornanali.footballclub_kotlin.model.ItemClub
 import org.jetbrains.anko.setContentView
@@ -25,7 +24,11 @@ class ListClubActivity : AppCompatActivity() {
             listClub.add(ItemClub(name[i], image.getResourceId(i, 0)))
         }
 
-        val listItemClubAdapter = ListItemClubAdapter(this, listClub)
+        val listItemClubAdapter = ListItemClubAdapter(this, listClub,
+                onItemClickListener = OnItemClickListener<ItemClub> {
+                    startActivity<DetailClubActivity>("club" to it)
+                }
+        )
         ListClubUI(listItemClubAdapter).setContentView(this)
     }
 }
