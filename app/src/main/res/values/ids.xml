@@ -2,4 +2,5 @@
 <resources>
     <item name="iv_club_logo" type="id">10001</item>
     <item name="tv_club_name" type="id">10002</item>
+    <item name="toolbar" type="id">1</item>
 </resources>

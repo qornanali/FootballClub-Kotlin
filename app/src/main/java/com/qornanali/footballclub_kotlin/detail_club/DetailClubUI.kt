@@ -1,13 +1,27 @@
 package com.qornanali.footballclub_kotlin.detail_club
 
-import android.view.View
-import org.jetbrains.anko.AnkoComponent
-import org.jetbrains.anko.AnkoContext
+import com.qornanali.footballclub_kotlin.R
+import org.jetbrains.anko.*
 
 class DetailClubUI : AnkoComponent<DetailClubActivity> {
 
-    override fun createView(ui: AnkoContext<DetailClubActivity>): View {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun createView(ui: AnkoContext<DetailClubActivity>) = with(ui) {
+        verticalLayout {
+            toolbar {
+                id = R.id.toolbar
+            }.lparams(width = matchParent, height = wrapContent)
+
+            relativeLayout {
+                lparams(width = matchParent, height = matchParent)
+                padding = dip(16)
+
+                imageView {
+                    id = R.id.iv_club_logo
+                }.lparams(width = wrapContent, height = wrapContent) {
+                    centerInParent()
+                }
+            }
+        }
     }
 
 }
