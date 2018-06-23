@@ -2,6 +2,7 @@ package com.qornanali.footballclub_kotlin.list_club
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.widget.AdapterView
 import com.qornanali.footballclub_kotlin.R
 import com.qornanali.footballclub_kotlin.adapter.ListItemClubAdapter
 import com.qornanali.footballclub_kotlin.model.ItemClub
@@ -21,7 +22,6 @@ class ListClubActivity : AppCompatActivity() {
         }
 
         val listItemClubAdapter = ListItemClubAdapter(this, listClub)
-
         ListClubUI(listItemClubAdapter).setContentView(this)
     }
 }
