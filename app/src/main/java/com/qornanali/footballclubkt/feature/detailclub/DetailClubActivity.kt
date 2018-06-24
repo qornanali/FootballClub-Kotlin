@@ -1,10 +1,10 @@
-package com.qornanali.footballclub_kotlin.detail_club
+package com.qornanali.footballclubkt.feature.detailclub
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.ImageView
 import com.qornanali.footballclub_kotlin.R
-import com.qornanali.footballclub_kotlin.model.ItemClub
+import com.qornanali.footballclubkt.model.ItemClub
 import com.squareup.picasso.Picasso
 import org.jetbrains.anko.setContentView
 

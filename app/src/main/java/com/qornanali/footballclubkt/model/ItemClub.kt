@@ -1,4 +1,4 @@
-package com.qornanali.footballclub_kotlin.model
+package com.qornanali.footballclubkt.model
 
 import java.io.Serializable
 

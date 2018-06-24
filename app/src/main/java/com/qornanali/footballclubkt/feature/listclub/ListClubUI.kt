@@ -1,8 +1,7 @@
-package com.qornanali.footballclub_kotlin.list_club
+package com.qornanali.footballclubkt.feature.listclub
 
 import android.support.v7.widget.LinearLayoutManager
-import com.qornanali.footballclub_kotlin.R
-import com.qornanali.footballclub_kotlin.adapter.ListItemClubAdapter
+import com.qornanali.footballclubkt.adapter.ListItemClubAdapter
 import org.jetbrains.anko.*
 import org.jetbrains.anko.recyclerview.v7.recyclerView
 
