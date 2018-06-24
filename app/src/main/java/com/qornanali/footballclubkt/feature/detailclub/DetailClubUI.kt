@@ -1,4 +1,4 @@
-package com.qornanali.footballclub_kotlin.detail_club
+package com.qornanali.footballclubkt.feature.detailclub
 
 import com.qornanali.footballclub_kotlin.R
 import org.jetbrains.anko.*

@@ -1,4 +1,4 @@
-package com.qornanali.footballclub_kotlin.list_club
+package com.qornanali.footballclubkt.feature.listclub
 
 import android.content.Context
 import android.view.View
