@@ -1,8 +1,9 @@
-package com.qornanali.footballclubkt.model
+package com.qornanali.footballclubkt.data.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
-data class Match(
+data class Event(
         @SerializedName("idEvent") val idEvent: String,
         @SerializedName("idSoccerXML") val idSoccerXML: String,
         @SerializedName("strEvent") val strEvent: String,
@@ -54,4 +55,4 @@ data class Match(
         @SerializedName("strBanner") val strBanner: Any,
         @SerializedName("strMap") val strMap: Any,
         @SerializedName("strLocked") val strLocked: String
-)
+) : Serializable

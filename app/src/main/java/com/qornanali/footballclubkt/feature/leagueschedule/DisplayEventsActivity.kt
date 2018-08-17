@@ -1,20 +1,15 @@
-package com.qornanali.footballclubkt.feature.viewleagueschedule
+package com.qornanali.footballclubkt.feature.leagueschedule
 
 import android.os.Bundle
 import android.support.design.widget.TabLayout
-import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
 import com.qornanali.footballclub_kotlin.R
 import com.qornanali.footballclubkt.adapter.ViewPagerAdapter
 
 
-class ViewLeagueScheduleActivity : AppCompatActivity() {
+class DisplayEventsActivity : AppCompatActivity() {
 
     private lateinit var pagerAdapter: ViewPagerAdapter
     private lateinit var viewPager: ViewPager
@@ -23,7 +18,7 @@ class ViewLeagueScheduleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_viewleagueschedule)
+        setContentView(R.layout.activity_displayevents)
 
         toolbar = findViewById(R.id.toolbar)
         viewPager = findViewById(R.id.view_pager)
@@ -32,22 +27,13 @@ class ViewLeagueScheduleActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
-        pagerAdapter.addFragment(DemoObjectFragment(), getString(R.string.next_matches))
-        pagerAdapter.addFragment(DemoObjectFragment(), getString(R.string.last_matches))
+        supportActionBar?.title = resources.getString(R.string.league_name)
+
+        pagerAdapter.addFragment(DisplayEventsFragment(), getString(R.string.next_events))
+        pagerAdapter.addFragment(DisplayEventsFragment(), getString(R.string.last_events))
 
         viewPager.adapter = pagerAdapter
 
         tabLayout.setupWithViewPager(viewPager)
-    }
-}
-
-class DemoObjectFragment : Fragment() {
-
-    override fun onCreateView(inflater: LayoutInflater,
-                              container: ViewGroup?,
-                              savedInstanceState: Bundle?): View {
-        val rootView = inflater.inflate(R.layout.test_layout, container, false)
-        val testText: TextView = rootView.findViewById(R.id.test_text)
-        return rootView
     }
 }
