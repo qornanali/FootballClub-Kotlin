@@ -1,25 +1,16 @@
 <resources>
     <string name="app_name">FootballClub-Kotlin</string>
 
-    <string-array name="club_name">
-        <item>Barcelona FC</item>
-        <item>Real Madrid FC</item>
-        <item>Bayern Munchen FC</item>
-        <item>Manchester City FC</item>
-        <item>Manchester United FC</item>
-        <item>Chelsea FC</item>
-        <item>AC Milan FC</item>
-        <item>Arsenal FC</item>
-    </string-array>
-
-    <array name="club_image">
-        <item>@drawable/img_barca</item>
-        <item>@drawable/img_madrid</item>
-        <item>@drawable/img_bayern</item>
-        <item>@drawable/img_city</item>
-        <item>@drawable/img_mu</item>
-        <item>@drawable/img_chelsea</item>
-        <item>@drawable/img_acm</item>
-        <item>@drawable/img_arsenal</item>
-    </array>
+    <string name="league_name">English Premier League</string>
+    <string name="next_events">Next matches</string>
+    <string name="last_events">Last matches</string>
+    <string name="detail_event">Detail match</string>
+    <string name="red_cards">Red cards</string>
+    <string name="yellow_cards">Yellow cards</string>
+    <string name="formation">Formation</string>
+    <string name="goalkeeper">Goalkeeper</string>
+    <string name="defender">Defender</string>
+    <string name="midfielder">Midfielder</string>
+    <string name="forward">Forward</string>
+    <string name="subtitutes">Subtitutes</string>
 </resources>
