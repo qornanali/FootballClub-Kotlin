@@ -29,22 +29,14 @@ dependencies {
     //Android Library
     implementation "com.android.support:appcompat-v7:$android_lib_version"
     implementation "com.android.support:design:$android_lib_version"
-
-    // Testing
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-
-    //Anko
-    implementation "org.jetbrains.anko:anko-commons:$anko_version"
-    implementation "org.jetbrains.anko:anko-design:$anko_version"
-    implementation "org.jetbrains.anko:anko-sdk25:$anko_version"
-    implementation "org.jetbrains.anko:anko-appcompat-v7:$anko_version"
-    implementation "org.jetbrains.anko:anko-recyclerview-v7:$anko_version"
-    implementation "org.jetbrains.anko:anko-recyclerview-v7-coroutines:$anko_version"
+    implementation "com.android.support:recyclerview-v7:$android_lib_version"
+    implementation "com.android.support:cardview-v7:$android_lib_version"
 
     //Picasso
     implementation "com.squareup.picasso:picasso:$picasso_version"
+
+    //Gson
+    implementation "com.google.code.gson:gson:$gson_version"
 }
 
 kotlin {
