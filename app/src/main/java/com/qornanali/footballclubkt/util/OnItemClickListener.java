@@ -1,4 +1,4 @@
-package com.qornanali.footballclubkt.adapter;
+package com.qornanali.footballclubkt.util;
 
 public interface OnItemClickListener<M> {
 

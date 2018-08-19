@@ -1,10 +1,11 @@
-package com.qornanali.footballclubkt.adapter.holder
+package com.qornanali.footballclubkt.util.holder
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
 import com.qornanali.footballclub_kotlin.R
 import com.qornanali.footballclubkt.data.model.Event
+import com.qornanali.footballclubkt.util.DateFormatter
 
 class ItemEventHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -15,7 +16,8 @@ class ItemEventHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     private val tvEventAwayTeam: TextView = itemView.findViewById(R.id.tv_event_awayteam)
 
     fun bind(event: Event) {
-        tvEventDate.text = event.strDate+" "+event.strTime.split("+").get(0)
+        var eventDate = DateFormatter.toDate("yyyy/MM/dd hh:mm", event.strDate+" "+event.strTime.split("+").get(0))
+        tvEventDate.text = DateFormatter.toString(eventDate!!, "dddd, MMMM yyyy hh:mm")
         tvEventAwayScore.text = if (event.intAwayScore != null) event.intAwayScore else ""
         tvEventHomeScore.text = if (event.intHomeScore != null) event.intHomeScore else ""
         tvEventHomeTeam.text = event.strHomeTeam
