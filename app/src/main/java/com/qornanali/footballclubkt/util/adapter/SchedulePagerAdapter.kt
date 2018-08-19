@@ -1,11 +1,11 @@
-package com.qornanali.footballclubkt.adapter
+package com.qornanali.footballclubkt.util.adapter
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 
-class ViewPagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+class SchedulePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     val fragments = ArrayList<Fragment>()
     var fragmentsTitles = ArrayList<String>()

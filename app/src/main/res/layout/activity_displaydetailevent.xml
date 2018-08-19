@@ -5,15 +5,7 @@
     android:background="@color/colorWhite"
     android:orientation="vertical">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <include layout="@layout/default_toolbar" />
-
-    </android.support.design.widget.AppBarLayout>
+    <include layout="@layout/default_appbar" />
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -95,9 +87,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_below="@id/tv_event_hometeam"
-                    android:gravity="center_horizontal"
                     android:layout_toLeftOf="@id/tv_vs"
                     android:ellipsize="end"
+                    android:gravity="center_horizontal"
                     android:maxLines="1"
                     android:textColor="@color/colorBlack"
                     android:textSize="25sp"
@@ -109,9 +101,9 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_below="@id/tv_event_awayteam"
-                    android:gravity="center_horizontal"
                     android:layout_toRightOf="@id/tv_vs"
                     android:ellipsize="end"
+                    android:gravity="center_horizontal"
                     android:maxLines="1"
                     android:textColor="@color/colorBlack"
                     android:textSize="25sp"
