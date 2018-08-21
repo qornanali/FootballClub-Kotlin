@@ -2,6 +2,7 @@ package com.qornanali.footballclubkt.feature
 
 import android.database.sqlite.SQLiteConstraintException
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -43,8 +44,8 @@ class DisplayDetailEventActivity : AppCompatActivity() {
     private lateinit var tvEventHomeScore: TextView
     private lateinit var tvEventAwayScore: TextView
     private lateinit var event: Event
-    private lateinit var homeBadge: String
-    private lateinit var awayBadge: String
+    private var homeBadge: String = ""
+    private var awayBadge: String = ""
     private lateinit var rvStatistics: RecyclerView
     private lateinit var adapter: ListStatisticAdapter
     private var statistics = ArrayList<Statistic>()
@@ -67,16 +68,14 @@ class DisplayDetailEventActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
         supportActionBar?.title = resources.getString(R.string.detail_event)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         adapter = ListStatisticAdapter(statistics)
 
         rvStatistics.layoutManager = LinearLayoutManager(this)
         rvStatistics.adapter = adapter
 
-        val eventDate = DateFormatter.toDate("yyyy/MM/dd hh:mm", event.strDate + " " + event.strTime.split("+").get(0))
-        tvEventDate.text = DateFormatter.toString(eventDate!!, "dddd, MMMM yyyy hh:mm")
+        val eventDate = DateFormatter.toDate(event.strDate + " " + event.strTime?.split("+")?.get(0), "dd/MM/yy HH:mm:ss")
+        tvEventDate.text = DateFormatter.toString(eventDate, "EEE, MMMM yyyy HH:mm")
         tvEventAwayTeam.text = event.strAwayTeam
         tvEventHomeTeam.text = event.strHomeTeam
 
@@ -85,18 +84,23 @@ class DisplayDetailEventActivity : AppCompatActivity() {
 
         doAsync {
             val data = gson.fromJson(apiRepository
-                    .doRequest(TsdbAPI.getTeamDetail(event.idAwayTeam)), ResponseGetTeams::class.java)
+                    .doRequest(TsdbAPI.getTeamDetail(event.idAwayTeam!!)), ResponseGetTeams::class.java)
             uiThread {
                 awayBadge = data.teams.get(0).strTeamBadge
-                Picasso.get().load(awayBadge).resize(150, 150).into(ivTeamAwayLogo)
+                if (!awayBadge.isEmpty()) {
+                    loadImage(awayBadge, ivTeamAwayLogo)
+                }
             }
         }
+
         doAsync {
             val data = gson.fromJson(apiRepository
-                    .doRequest(TsdbAPI.getTeamDetail(event.idHomeTeam)), ResponseGetTeams::class.java)
+                    .doRequest(TsdbAPI.getTeamDetail(event.idHomeTeam!!)), ResponseGetTeams::class.java)
             uiThread {
                 homeBadge = data.teams.get(0).strTeamBadge
-                Picasso.get().load(homeBadge).resize(150, 150).into(ivTeamHomeLogo)
+                if (!homeBadge.isEmpty()) {
+                    loadImage(homeBadge, ivTeamHomeLogo)
+                }
             }
         }
 
@@ -114,25 +118,27 @@ class DisplayDetailEventActivity : AppCompatActivity() {
         statistics.add(Statistic(event.strHomeLineupSubstitutes, resources.getString(R.string.subtitutes), event.strAwayLineupSubstitutes))
 
         adapter.notifyDataSetChanged()
-
-        changeFavoriteMenuIcon(checkFavorited())
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_favorites, menu)
+        if (checkFavorited()) {
+            menu?.getItem(0)?.icon = ContextCompat.getDrawable(this, R.drawable.ic_action_star_2)
+        }
         return true
     }
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.m_favorites -> {
+            R.id.m_action_favorites -> {
                 val statusFavorited = checkFavorited()
                 if (statusFavorited) {
                     removeFromFavorite()
+                    item.icon = ContextCompat.getDrawable(this, R.drawable.ic_action_star)
                 } else {
                     addToFavorite()
+                    item.icon = ContextCompat.getDrawable(this, R.drawable.ic_action_star_2)
                 }
-                changeFavoriteMenuIcon(statusFavorited)
             }
             else -> {
                 return super.onOptionsItemSelected(item)
@@ -141,13 +147,11 @@ class DisplayDetailEventActivity : AppCompatActivity() {
         return true
     }
 
-    private fun changeFavoriteMenuIcon(isFavorited: Boolean) {
-        if (isFavorited) {
 
-        } else {
-
-        }
+    private fun loadImage(url: String, ivTarget: ImageView) {
+        Picasso.get().load(url).resize(150, 150).into(ivTarget)
     }
+
 
     private fun addToFavorite() {
         try {
@@ -192,9 +196,12 @@ class DisplayDetailEventActivity : AppCompatActivity() {
     private fun removeFromFavorite() {
         try {
             database.use {
+                //                delete(FavoriteEvent.TABLE_FAVORITEEVENT,
+//                        "({field} = {value})",
+//                        "field" to FavoriteEvent.FIELD_IDEVENT,
+//                        "value" to event.idEvent)
                 delete(FavoriteEvent.TABLE_FAVORITEEVENT,
-                        "({field} = {value})",
-                        "field" to FavoriteEvent.FIELD_IDEVENT,
+                        "(FIELD_IDEVENT = {value})",
                         "value" to event.idEvent)
             }
             Toast.makeText(this, resources.getString(R.string.removed_from_favorites), Toast.LENGTH_LONG).show()
@@ -207,11 +214,14 @@ class DisplayDetailEventActivity : AppCompatActivity() {
         var favorited = false
         try {
             database.use {
+                //                val q = select(FavoriteEvent.TABLE_FAVORITEEVENT, FavoriteEvent.FIELD_IDEVENT)
+//                        .whereArgs("({field} = {value})",
+//                                "field" to FavoriteEvent.FIELD_IDEVENT,
+//                                "value" to event.idEvent)
                 val q = select(FavoriteEvent.TABLE_FAVORITEEVENT, FavoriteEvent.FIELD_IDEVENT)
-                        .whereArgs("({field} = {value})",
-                                "field" to FavoriteEvent.FIELD_IDEVENT,
+                        .whereArgs("(FIELD_IDEVENT = {value})",
                                 "value" to event.idEvent)
-                val listFavorites = q.parseList(classParser<FavoriteEvent>())
+                val listFavorites = q.parseList(classParser<String>())
                 favorited = !listFavorites.isEmpty()
             }
         } catch (e: SQLiteConstraintException) {

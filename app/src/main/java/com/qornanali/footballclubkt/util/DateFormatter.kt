@@ -9,7 +9,7 @@ object DateFormatter {
         return SimpleDateFormat(format).format(date)
     }
 
-    fun toDate(date: String, format: String): Date? {
+    fun toDate(date: String, format: String): Date {
         return SimpleDateFormat(format).parse(date)
     }
 

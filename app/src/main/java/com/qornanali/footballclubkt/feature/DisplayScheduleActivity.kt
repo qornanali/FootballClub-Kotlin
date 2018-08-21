@@ -47,7 +47,7 @@ class DisplayScheduleActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.m_favorites -> startActivity<DisplayFavoriteEventsActivity>()
+            R.id.m_action_favorites -> startActivity<DisplayFavoriteEventsActivity>()
             else -> {
                 return super.onOptionsItemSelected(item)
             }
