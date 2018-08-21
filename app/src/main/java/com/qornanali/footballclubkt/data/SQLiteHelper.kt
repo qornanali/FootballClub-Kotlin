@@ -24,6 +24,8 @@ class SQLiteHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "footballclubkt.
                 FavoriteEvent.FIELD_IDEVENT to TEXT + UNIQUE,
                 FavoriteEvent.FIELD_HOMETEAM to TEXT,
                 FavoriteEvent.FIELD_AWAYTEAM to TEXT,
+                FavoriteEvent.FIELD_HOMESCORE to TEXT,
+                FavoriteEvent.FIELD_AWAYSCORE to TEXT,
                 FavoriteEvent.FIELD_HOMERED to TEXT,
                 FavoriteEvent.FIELD_HOMEYELLOW to TEXT,
                 FavoriteEvent.FIELD_HOMEGK to TEXT,

@@ -1,7 +1,8 @@
 package com.qornanali.footballclubkt.data.model
 
 data class FavoriteEvent(
-        val idEvent: Long?,
+        val id: Long?,
+        val idEvent: String?,
         val strHomeTeam: String?,
         val strAwayTeam: String?,
         val intHomeScore: String?,
