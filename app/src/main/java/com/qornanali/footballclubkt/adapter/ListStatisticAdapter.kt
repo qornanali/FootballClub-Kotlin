@@ -1,12 +1,11 @@
-package com.qornanali.footballclubkt.util.adapter
+package com.qornanali.footballclubkt.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.qornanali.footballclub_kotlin.R
-import com.qornanali.footballclubkt.util.holder.ItemStatisticHolder
-import com.qornanali.footballclubkt.data.model.Statistic
-import com.qornanali.footballclubkt.util.OnItemClickListener
+import com.qornanali.footballclubkt.holder.ItemStatisticHolder
+import com.qornanali.footballclubkt.model.Statistic
 
 class ListStatisticAdapter(val list: ArrayList<Statistic> = ArrayList()) : RecyclerView.Adapter<ItemStatisticHolder>() {
 

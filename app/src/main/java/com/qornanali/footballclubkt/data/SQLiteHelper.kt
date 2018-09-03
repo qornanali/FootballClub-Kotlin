@@ -2,7 +2,7 @@ package com.qornanali.footballclubkt.data
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import com.qornanali.footballclubkt.data.model.FavoriteEvent
+import com.qornanali.footballclubkt.model.FavoriteEvent
 import org.jetbrains.anko.db.*
 
 class SQLiteHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "footballclubkt.db", null, 1) {
@@ -47,9 +47,7 @@ class SQLiteHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "footballclubkt.
                 FavoriteEvent.FIELD_DATE to TEXT,
                 FavoriteEvent.FIELD_TIME to TEXT,
                 FavoriteEvent.FIELD_HOMEID to TEXT,
-                FavoriteEvent.FIELD_AWAYID to TEXT,
-                FavoriteEvent.FIELD_HOMEBADGE to TEXT,
-                FavoriteEvent.FIELD_AWAYBADGE to TEXT
+                FavoriteEvent.FIELD_AWAYID to TEXT
         )
     }
 

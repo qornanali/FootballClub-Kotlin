@@ -5,11 +5,11 @@ import java.util.*
 
 object DateFormatter {
 
-    fun toString(date: Date, format: String): String {
+    fun formatToString(date: Date, format: String): String {
         return SimpleDateFormat(format).format(date)
     }
 
-    fun toDate(date: String, format: String): Date {
+    fun formatToDate(date: String, format: String): Date {
         return SimpleDateFormat(format).parse(date)
     }
 
