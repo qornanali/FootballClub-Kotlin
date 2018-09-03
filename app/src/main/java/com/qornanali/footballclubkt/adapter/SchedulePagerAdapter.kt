@@ -1,4 +1,4 @@
-package com.qornanali.footballclubkt.util.adapter
+package com.qornanali.footballclubkt.adapter
 
 import android.os.Bundle
 import android.support.v4.app.Fragment

@@ -3,7 +3,7 @@ package com.qornanali.footballclubkt.data
 import android.net.Uri
 import com.qornanali.footballclub_kotlin.BuildConfig
 
-object TsdbAPI {
+object TheSportdbAPI {
 
     fun getNextEvents(leagueId: String): String {
         return Uri.parse(BuildConfig.thesportdb_base_url).buildUpon()

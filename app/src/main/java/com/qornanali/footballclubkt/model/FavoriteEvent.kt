@@ -1,4 +1,4 @@
-package com.qornanali.footballclubkt.data.model
+package com.qornanali.footballclubkt.model
 
 data class FavoriteEvent(
         val id: Long?,
@@ -28,9 +28,7 @@ data class FavoriteEvent(
         val strDate: String?,
         val strTime: String?,
         val idHomeTeam: String?,
-        val idAwayTeam: String?,
-        val strHomeBadge: String?,
-        val strAwayBadge: String?) {
+        val idAwayTeam: String?) {
 
     companion object {
         const val TABLE_FAVORITEEVENT: String = "TABLE_FAVORITEEVENT"

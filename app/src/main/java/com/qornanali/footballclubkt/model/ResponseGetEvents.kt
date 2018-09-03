@@ -1,4 +1,4 @@
-package com.qornanali.footballclubkt.data.model
+package com.qornanali.footballclubkt.model
 
 import com.google.gson.annotations.SerializedName
 

@@ -11,15 +11,15 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.qornanali.footballclubkt.feature.DisplayScheduleActivity">
+        <activity android:name="com.qornanali.footballclubkt.feature.schedule.DisplayScheduleActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.qornanali.footballclubkt.feature.DisplayDetailEventActivity" />
-        <activity android:name="com.qornanali.footballclubkt.feature.DisplayFavoriteEventsActivity" />
+        <activity android:name="com.qornanali.footballclubkt.feature.detailevent.DisplayDetailEventActivity" />
+        <activity android:name="com.qornanali.footballclubkt.feature.favoritevent.DisplayFavoriteEventsActivity" />
     </application>
 
 </manifest>

@@ -1,11 +1,11 @@
-package com.qornanali.footballclubkt.util.adapter
+package com.qornanali.footballclubkt.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.qornanali.footballclub_kotlin.R
-import com.qornanali.footballclubkt.util.holder.ItemEventHolder
-import com.qornanali.footballclubkt.data.model.Event
+import com.qornanali.footballclubkt.holder.ItemEventHolder
+import com.qornanali.footballclubkt.model.Event
 import com.qornanali.footballclubkt.util.OnItemClickListener
 
 class ListEventAdapter(val list: ArrayList<Event> = ArrayList(), val onItemClickListener: OnItemClickListener<Event>) : RecyclerView.Adapter<ItemEventHolder>() {

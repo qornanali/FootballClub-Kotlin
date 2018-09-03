@@ -1,10 +1,10 @@
-package com.qornanali.footballclubkt.util.holder
+package com.qornanali.footballclubkt.holder
 
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.TextView
 import com.qornanali.footballclub_kotlin.R
-import com.qornanali.footballclubkt.data.model.Statistic
+import com.qornanali.footballclubkt.model.Statistic
 
 class ItemStatisticHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 

@@ -47,6 +47,8 @@ dependencies {
     //Anko
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
     implementation "org.jetbrains.anko:anko-sqlite:$anko_version"
+
+    testImplementation 'junit:junit:4.12'
 }
 
 kotlin {
