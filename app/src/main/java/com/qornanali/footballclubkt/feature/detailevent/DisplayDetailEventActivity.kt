@@ -38,52 +38,7 @@ class DisplayDetailEventActivity : BaseActivity<DisplayDetailEventAPresenter, Di
     private lateinit var event: Event
     private lateinit var adapter: ListStatisticAdapter
     private var favoriteMenu: MenuItem? = null
-    private var statistics = ArrayList<Statistic>()
-
-    override fun showTeamName(awayName: String, homeName: String) {
-        tvEventAwayTeam.text = awayName
-        tvEventHomeTeam.text = homeName
-    }
-
-    override fun showEventDate(date: String) {
-        tvEventDate.text = date
-    }
-
-    override fun displayActionBarTitle(title: String) {
-        supportActionBar?.title = resources.getString(R.string.detail_event)
-    }
-
-    override fun successRemovedFromFavorite() {
-        toast(resources.getString(R.string.removed_from_favorites))
-        setMenuItemIcon(favoriteMenu, R.drawable.ic_action_star)
-    }
-
-    override fun successAddedToFavorite() {
-        toast(resources.getString(R.string.added_to_favorites))
-        setMenuItemIcon(favoriteMenu, R.drawable.ic_action_star_2)
-    }
-
-    override fun showScores(awayScore: String, homeScore: String) {
-        tvEventAwayScore.text = awayScore
-        tvEventHomeScore.text = homeScore
-    }
-
-    override fun showStatistic(data: List<Statistic>) {
-        statistics.addAll(data)
-        adapter.notifyDataSetChanged()
-    }
-
-    override fun showAwayBadges(imageUrl: String) {
-        if (!imageUrl.isEmpty()) {
-            loadImage(imageUrl, ivTeamAwayLogo)
-        }
-    }
-
-    override fun showHomeBadges(imageUrl: String) {
-        if (!imageUrl.isEmpty()) {
-            loadImage(imageUrl, ivTeamHomeLogo)
-        }
-    }
+    private val statistics = ArrayList<Statistic>()
 
     override fun attachLayout(): Int {
         return R.layout.activity_displaydetailevent
@@ -106,11 +61,17 @@ class DisplayDetailEventActivity : BaseActivity<DisplayDetailEventAPresenter, Di
         rvStatistics.layoutManager = LinearLayoutManager(this)
         rvStatistics.adapter = adapter
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         presenter.attachView(this)
 
         presenter.setActionBar(resources)
-        presenter.loadEvent(event, resources)
+        presenter.loadTeamsName(event.strAwayTeam, event.strHomeTeam)
+        presenter.loadAwayBadge(event.idAwayTeam)
+        presenter.loadHomeBadge(event.idHomeTeam)
+        presenter.loadStatistic(event, resources)
+        presenter.loadEventDate(event.strDate, event.strTime)
     }
 
     override fun attachPresenter(): DisplayDetailEventAPresenter {
@@ -169,8 +130,53 @@ class DisplayDetailEventActivity : BaseActivity<DisplayDetailEventAPresenter, Di
                 favorited = !listFavorites.isEmpty()
             }
         } catch (e: SQLiteConstraintException) {
-            Toast.makeText(this, e.message, Toast.LENGTH_LONG).show()
+            showError(e.message)
         }
         return favorited
+    }
+
+    override fun showTeamName(awayName: String, homeName: String) {
+        tvEventAwayTeam.text = awayName
+        tvEventHomeTeam.text = homeName
+    }
+
+    override fun showEventDate(date: String) {
+        tvEventDate.text = date
+    }
+
+    override fun displayActionBarTitle(title: String) {
+        supportActionBar?.title = resources.getString(R.string.detail_event)
+    }
+
+    override fun successRemovedFromFavorite() {
+        toast(resources.getString(R.string.removed_from_favorites))
+        setMenuItemIcon(favoriteMenu, R.drawable.ic_action_star)
+    }
+
+    override fun successAddedToFavorite() {
+        toast(resources.getString(R.string.added_to_favorites))
+        setMenuItemIcon(favoriteMenu, R.drawable.ic_action_star_2)
+    }
+
+    override fun showScores(awayScore: String, homeScore: String) {
+        tvEventAwayScore.text = awayScore
+        tvEventHomeScore.text = homeScore
+    }
+
+    override fun showStatistic(data: List<Statistic>) {
+        statistics.addAll(data)
+        adapter.notifyDataSetChanged()
+    }
+
+    override fun showAwayBadges(imageUrl: String) {
+        if (!imageUrl.isEmpty()) {
+            loadImage(imageUrl, ivTeamAwayLogo)
+        }
+    }
+
+    override fun showHomeBadges(imageUrl: String) {
+        if (!imageUrl.isEmpty()) {
+            loadImage(imageUrl, ivTeamHomeLogo)
+        }
     }
 }

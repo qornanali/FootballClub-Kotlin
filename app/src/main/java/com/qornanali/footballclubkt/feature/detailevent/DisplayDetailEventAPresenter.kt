@@ -24,19 +24,13 @@ class DisplayDetailEventAPresenter : BasePresenter<DisplayDetailEventAView>() {
         view.displayActionBarTitle(resources.getString(R.string.my_favorites))
     }
 
-    fun loadEvent(event: Event, resources: Resources) {
-        val eventDate = DateFormatter.formatToDate(event.strDate + " " + event.strTime?.split("+")?.get(0), "dd/MM/yy HH:mm:ss")
+    fun loadEventDate(strDate: String?, strTime: String?){
+        val eventDate = DateFormatter.formatToDate(strDate + " " + strTime?.split("+")?.get(0), "dd/MM/yy HH:mm:ss")
         view.showEventDate(DateFormatter.formatToString(eventDate, "EEE, MMMM yyyy HH:mm"))
-        view.showTeamName(event.strAwayTeam, event.strHomeTeam)
+    }
 
-        loadStatistic(event, resources)
-
-        if (event.idHomeTeam != null) {
-            loadHomeBadge(event.idHomeTeam)
-        }
-        if (event.idAwayTeam != null) {
-            loadAwayBadge(event.idAwayTeam)
-        }
+    fun loadTeamsName(awayName : String, homeName: String){
+        view.showTeamName(awayName, homeName)
     }
 
 
@@ -105,7 +99,7 @@ class DisplayDetailEventAPresenter : BasePresenter<DisplayDetailEventAView>() {
         view.showStatistic(data)
     }
 
-    fun loadHomeBadge(idHomeTeam: String) {
+    fun loadHomeBadge(idHomeTeam: String?) {
         doAsync {
             val data = Gson().fromJson(ApiRepository()
                     .doRequest(TheSportdbAPI.getTeamDetail(idHomeTeam)), ResponseGetTeams::class.java)
@@ -115,7 +109,7 @@ class DisplayDetailEventAPresenter : BasePresenter<DisplayDetailEventAView>() {
         }
     }
 
-    fun loadAwayBadge(idAwayTeam: String) {
+    fun loadAwayBadge(idAwayTeam: String?) {
         doAsync {
             val data = Gson().fromJson(ApiRepository()
                     .doRequest(TheSportdbAPI.getTeamDetail(idAwayTeam)), ResponseGetTeams::class.java)

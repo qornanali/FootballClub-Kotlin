@@ -5,7 +5,7 @@ import com.qornanali.footballclub_kotlin.BuildConfig
 
 object TheSportdbAPI {
 
-    fun getNextEvents(leagueId: String): String {
+    fun getNextEvents(leagueId: String?): String {
         return Uri.parse(BuildConfig.thesportdb_base_url).buildUpon()
                 .appendPath(BuildConfig.thesportdb_key)
                 .appendPath("eventsnextleague.php")
@@ -13,7 +13,7 @@ object TheSportdbAPI {
                 .build().toString()
     }
 
-    fun getLastEvents(leagueId: String): String {
+    fun getLastEvents(leagueId: String?): String {
         return Uri.parse(BuildConfig.thesportdb_base_url).buildUpon()
                 .appendPath(BuildConfig.thesportdb_key)
                 .appendPath("eventspastleague.php")
@@ -21,7 +21,7 @@ object TheSportdbAPI {
                 .build().toString()
     }
 
-    fun getTeamDetail(teamId: String):String {
+    fun getTeamDetail(teamId: String?):String {
         return Uri.parse(BuildConfig.thesportdb_base_url).buildUpon()
                 .appendPath(BuildConfig.thesportdb_key)
                 .appendPath("lookupteam.php")
