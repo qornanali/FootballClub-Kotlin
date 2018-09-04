@@ -18,37 +18,18 @@ import org.jetbrains.anko.toast
 
 class DisplayFavoriteEventsActivity : BaseActivity<DisplayFavoriteEventsAPresenter, DisplayFavoriteEventsAView>(), DisplayFavoriteEventsAView {
 
-    override fun showError(message: CharSequence?) {
-        if (message != null) {
-            toast(message)
-        }
-    }
-
     private lateinit var toolbar: Toolbar
     private lateinit var rvEvents: RecyclerView
     private lateinit var adapter: ListEventAdapter
-    private var events = ArrayList<Event>()
-
-    override fun showFavoriteEvents(data: List<FavoriteEvent>) {
-        for (favorite in data) {
-            events.add(Event(favorite))
-        }
-        adapter.notifyDataSetChanged()
-    }
-
-    override fun displayActionBarTitle(title: String) {
-        supportActionBar?.title = title
-    }
-
-    override fun attachLayout(): Int {
-        return R.layout.activity_displayfavoriteevents
-    }
+    private val events = ArrayList<Event>()
 
     override fun onInitializeViews() {
         toolbar = find(R.id.toolbar)
         rvEvents = find(R.id.rv_events)
 
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         adapter = ListEventAdapter(events, OnItemClickListener {
             startActivity<DisplayDetailEventActivity>("event" to it)
@@ -66,5 +47,28 @@ class DisplayFavoriteEventsActivity : BaseActivity<DisplayFavoriteEventsAPresent
 
     override fun attachPresenter(): DisplayFavoriteEventsAPresenter {
         return DisplayFavoriteEventsAPresenter()
+    }
+
+
+
+    override fun showError(message: CharSequence?) {
+        if (message != null) {
+            toast(message)
+        }
+    }
+
+    override fun showFavoriteEvents(data: List<FavoriteEvent>) {
+        for (favorite in data) {
+            events.add(Event(favorite))
+        }
+        adapter.notifyDataSetChanged()
+    }
+
+    override fun displayActionBarTitle(title: String) {
+        supportActionBar?.title = title
+    }
+
+    override fun attachLayout(): Int {
+        return R.layout.activity_displayfavoriteevents
     }
 }

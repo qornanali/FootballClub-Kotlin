@@ -18,7 +18,7 @@ class DisplayListEventFragment : BaseFragment<DisplayListEventFPresenter, Displa
     private lateinit var rvEvents: RecyclerView
     private lateinit var progressBar: ProgressBar
     private lateinit var adapter: ListEventAdapter
-    private var events = ArrayList<Event>()
+    private val events = ArrayList<Event>()
 
     override fun attachPresenter(): DisplayListEventFPresenter {
         return DisplayListEventFPresenter()
@@ -33,7 +33,6 @@ class DisplayListEventFragment : BaseFragment<DisplayListEventFPresenter, Displa
         rvEvents = rootView.find(R.id.rv_events)
         progressBar = rootView.find(R.id.progress_bar)
         adapter = ListEventAdapter(events, OnItemClickListener {
-            val x = it
             activity?.startActivity<DisplayDetailEventActivity>("event" to it)
         })
 

@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentStatePagerAdapter
 class SchedulePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     val fragments = ArrayList<Fragment>()
-    var fragmentsTitles = ArrayList<String>()
+    val fragmentsTitles = ArrayList<String>()
 
     override fun getCount(): Int {
         return fragmentsTitles.size

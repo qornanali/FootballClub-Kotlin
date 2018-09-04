@@ -16,24 +16,13 @@ import org.jetbrains.anko.startActivity
 
 class DisplayScheduleActivity : BaseActivity<DisplayScheduleAPresenter, DisplayScheduleAView>(), DisplayScheduleAView {
 
-    override fun attachPresenter(): DisplayScheduleAPresenter {
-        return DisplayScheduleAPresenter()
-    }
-
     private lateinit var pagerAdapter: SchedulePagerAdapter
     private lateinit var viewPager: ViewPager
     private lateinit var toolbar: Toolbar
     private lateinit var tabLayout: TabLayout
 
-    override fun displayTabs(fragments: List<Fragment>, titles: List<String>) {
-        for (i in 0..fragments.size - 1) {
-            pagerAdapter.addFragment(fragment = fragments.get(i), title = titles.get(i))
-        }
-        pagerAdapter.notifyDataSetChanged()
-    }
-
-    override fun displayActionBarTitle(title: String) {
-        supportActionBar?.title = title
+    override fun attachPresenter(): DisplayScheduleAPresenter {
+        return DisplayScheduleAPresenter()
     }
 
     override fun attachLayout(): Int {
@@ -71,4 +60,17 @@ class DisplayScheduleActivity : BaseActivity<DisplayScheduleAPresenter, DisplayS
         }
         return true
     }
+
+
+    override fun displayTabs(fragments: List<Fragment>, titles: List<String>) {
+        for (i in 0..fragments.size - 1) {
+            pagerAdapter.addFragment(fragment = fragments.get(i), title = titles.get(i))
+        }
+        pagerAdapter.notifyDataSetChanged()
+    }
+
+    override fun displayActionBarTitle(title: String) {
+        supportActionBar?.title = title
+    }
+
 }
