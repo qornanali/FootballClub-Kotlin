@@ -17,7 +17,7 @@ class ItemEventHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(event: Event) {
         var eventDate = DateFormatter.formatToDate(event.strDate + " " + event.strTime?.split("+")?.get(0), "dd/MM/yy HH:mm:ss")
-        tvEventDate.text = DateFormatter.formatToString(eventDate, "EEE, MMMM yyyy HH:mm")
+        tvEventDate.text = DateFormatter.formatToString(eventDate, "EEEE, dd MMMM yyyy HH:mm")
         tvEventAwayScore.text = if (event.intAwayScore != null) event.intAwayScore else ""
         tvEventHomeScore.text = if (event.intHomeScore != null) event.intHomeScore else ""
         tvEventHomeTeam.text = event.strHomeTeam

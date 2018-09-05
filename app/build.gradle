@@ -13,15 +13,11 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "thesportdb_base_url", "\"https://www.thesportsdb.com/api/v1/json/\"")
+        buildConfigField("String", "thesportdb_key", "\"1\"")
     }
     buildTypes {
-        debug{
-            buildConfigField("String", "thesportdb_base_url", "\"https://www.thesportsdb.com/api/v1/json/\"")
-            buildConfigField("String", "thesportdb_key", "\"1\"")
-        }
         release {
-            buildConfigField("String", "thesportdb_base_url", "\"https://www.thesportsdb.com/api/v1/json/\"")
-            buildConfigField("String", "thesportdb_key", "\"1\"")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -48,7 +44,12 @@ dependencies {
     implementation "org.jetbrains.anko:anko-commons:$anko_version"
     implementation "org.jetbrains.anko:anko-sqlite:$anko_version"
 
+    //Testing
     testImplementation 'junit:junit:4.12'
+    testImplementation "org.mockito:mockito-inline:2.19.0"
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
 }
 
 kotlin {
