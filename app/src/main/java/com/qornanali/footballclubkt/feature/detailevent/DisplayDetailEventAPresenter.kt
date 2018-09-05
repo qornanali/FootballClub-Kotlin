@@ -26,7 +26,7 @@ class DisplayDetailEventAPresenter : BasePresenter<DisplayDetailEventAView>() {
 
     fun loadEventDate(strDate: String?, strTime: String?){
         val eventDate = DateFormatter.formatToDate(strDate + " " + strTime?.split("+")?.get(0), "dd/MM/yy HH:mm:ss")
-        view.showEventDate(DateFormatter.formatToString(eventDate, "EEE, MMMM yyyy HH:mm"))
+        view.showEventDate(DateFormatter.formatToString(eventDate, "EEEE, dd MMMM yyyy HH:mm"))
     }
 
     fun loadTeamsName(awayName : String, homeName: String){

@@ -41,7 +41,7 @@ class DisplayListEventFragment : BaseFragment<DisplayListEventFPresenter, Displa
 
         presenter.attachView(this)
 
-        presenter.loadListEvent(arguments, resources)
+        presenter.loadListEvent(arguments?.getString("title"), resources.getString(R.string.last_events))
     }
 
     override fun attachLayout(): Int {
