@@ -3,6 +3,7 @@ package com.qornanali.footballclubkt.feature.detailevent
 import com.google.gson.Gson
 import com.qornanali.footballclubkt.data.ApiRepository
 import com.qornanali.footballclubkt.data.TheSportdbAPI
+import com.qornanali.footballclubkt.feature.BaseView
 import com.qornanali.footballclubkt.model.ResponseGetTeams
 import com.qornanali.footballclubkt.model.Team
 import com.qornanali.footballclubkt.util.DateFormatter
@@ -19,8 +20,6 @@ class DisplayDetailEventAPresenterTest {
     @Mock
     private lateinit var view: DisplayDetailEventAView
     @Mock
-    private lateinit var apiRepository: ApiRepository
-    @Mock
     private lateinit var presenter: DisplayDetailEventAPresenter
 
 
@@ -28,17 +27,14 @@ class DisplayDetailEventAPresenterTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         presenter = DisplayDetailEventAPresenter()
+        presenter.attachView(view)
     }
 
     @Test
     fun loadEventDate() {
-        val dateCalendar = Calendar.getInstance()
-        val formatDate = "yyyy-MM-dd"
-        val formatTime = "hh:mm"
-        val format = "EEEE, dd MMMM yyyy HH:mm"
-        val strDate = DateFormatter.formatToString(dateCalendar.time, formatDate)
-        val strTime = DateFormatter.formatToString(dateCalendar.time, formatTime)
-        val eventDate = DateFormatter.formatToString(dateCalendar.time, format)
+        val strDate = "15/09/18"
+        val strTime = "14:00:00+00:00"
+        val eventDate = "Saturday, 15 September 2018 14:00"
 
         presenter.loadEventDate(strDate, strTime)
 

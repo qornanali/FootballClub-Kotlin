@@ -25,6 +25,7 @@ class DisplayListEventFPresenterTest {
     fun setUp() {
         MockitoAnnotations.initMocks(this)
         presenter = DisplayListEventFPresenter()
+        presenter.attachView(view)
     }
 
     @Test
