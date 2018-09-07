@@ -9,9 +9,10 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
+import com.google.gson.Gson
 import com.qornanali.footballclub_kotlin.R
 import com.qornanali.footballclubkt.adapter.ListStatisticAdapter
+import com.qornanali.footballclubkt.data.ApiRepository
 import com.qornanali.footballclubkt.data.database
 import com.qornanali.footballclubkt.feature.BaseActivity
 import com.qornanali.footballclubkt.model.Event
@@ -24,7 +25,9 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.toast
 
 
-class DisplayDetailEventActivity : BaseActivity<DisplayDetailEventAPresenter, DisplayDetailEventAView>(), DisplayDetailEventAView {
+class DisplayDetailEventActivity :
+        BaseActivity<DisplayDetailEventAPresenter, DisplayDetailEventAView>(),
+        DisplayDetailEventAView {
 
     private lateinit var toolbar: Toolbar
     private lateinit var tvEventDate: TextView
@@ -61,10 +64,6 @@ class DisplayDetailEventActivity : BaseActivity<DisplayDetailEventAPresenter, Di
         rvStatistics.layoutManager = LinearLayoutManager(this)
         rvStatistics.adapter = adapter
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-
-        presenter.attachView(this)
 
         presenter.setActionBar(resources)
         presenter.loadTeamsName(event.strAwayTeam, event.strHomeTeam)
@@ -75,7 +74,7 @@ class DisplayDetailEventActivity : BaseActivity<DisplayDetailEventAPresenter, Di
     }
 
     override fun attachPresenter(): DisplayDetailEventAPresenter {
-        return DisplayDetailEventAPresenter()
+        return DisplayDetailEventAPresenter(Gson(), ApiRepository(), this)
     }
 
     override fun showError(message: CharSequence?) {
@@ -98,7 +97,7 @@ class DisplayDetailEventActivity : BaseActivity<DisplayDetailEventAPresenter, Di
             R.id.m_action_favorites -> {
                 val statusFavorited = checkFavorited()
                 if (statusFavorited) {
-                    presenter.removeFromFavorite(event, database)
+                    presenter.removeFromFavorite(event.idEvent, database)
                 } else {
                     presenter.addToFavorite(event, database)
                 }
@@ -111,7 +110,7 @@ class DisplayDetailEventActivity : BaseActivity<DisplayDetailEventAPresenter, Di
     }
 
 
-    private fun loadImage(url: String, ivTarget: ImageView) {
+    private fun loadImage(url : String?, ivTarget: ImageView) {
         Picasso.get().load(url).resize(150, 150).into(ivTarget)
     }
 
@@ -168,15 +167,11 @@ class DisplayDetailEventActivity : BaseActivity<DisplayDetailEventAPresenter, Di
         adapter.notifyDataSetChanged()
     }
 
-    override fun showAwayBadges(imageUrl: String) {
-        if (!imageUrl.isEmpty()) {
-            loadImage(imageUrl, ivTeamAwayLogo)
-        }
+    override fun showAwayBadge(imageUrl: String?) {
+        loadImage(imageUrl, ivTeamAwayLogo)
     }
 
-    override fun showHomeBadges(imageUrl: String) {
-        if (!imageUrl.isEmpty()) {
-            loadImage(imageUrl, ivTeamHomeLogo)
-        }
+    override fun showHomeBadge( imageUrl: String?) {
+        loadImage(imageUrl, ivTeamHomeLogo)
     }
 }

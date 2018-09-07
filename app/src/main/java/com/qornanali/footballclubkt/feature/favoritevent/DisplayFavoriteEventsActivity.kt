@@ -3,8 +3,10 @@ package com.qornanali.footballclubkt.feature.favoritevent
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
+import com.google.gson.Gson
 import com.qornanali.footballclub_kotlin.R
 import com.qornanali.footballclubkt.adapter.ListEventAdapter
+import com.qornanali.footballclubkt.data.ApiRepository
 import com.qornanali.footballclubkt.data.database
 import com.qornanali.footballclubkt.feature.BaseActivity
 import com.qornanali.footballclubkt.feature.detailevent.DisplayDetailEventActivity
@@ -16,7 +18,9 @@ import org.jetbrains.anko.startActivity
 import org.jetbrains.anko.toast
 
 
-class DisplayFavoriteEventsActivity : BaseActivity<DisplayFavoriteEventsAPresenter, DisplayFavoriteEventsAView>(), DisplayFavoriteEventsAView {
+class DisplayFavoriteEventsActivity :
+        BaseActivity<DisplayFavoriteEventsAPresenter, DisplayFavoriteEventsAView>(),
+        DisplayFavoriteEventsAView {
 
     private lateinit var toolbar: Toolbar
     private lateinit var rvEvents: RecyclerView
@@ -28,8 +32,6 @@ class DisplayFavoriteEventsActivity : BaseActivity<DisplayFavoriteEventsAPresent
         rvEvents = find(R.id.rv_events)
 
         setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         adapter = ListEventAdapter(events, OnItemClickListener {
             startActivity<DisplayDetailEventActivity>("event" to it)
@@ -38,17 +40,14 @@ class DisplayFavoriteEventsActivity : BaseActivity<DisplayFavoriteEventsAPresent
         rvEvents.layoutManager = LinearLayoutManager(this)
         rvEvents.adapter = adapter
 
-        presenter.attachView(this)
-
         presenter.setActionBar(resources)
 
-        presenter.loadFavoriteEvents(database = database)
+        presenter.loadFavoriteEvents(database)
     }
 
     override fun attachPresenter(): DisplayFavoriteEventsAPresenter {
-        return DisplayFavoriteEventsAPresenter()
+        return DisplayFavoriteEventsAPresenter(Gson(), ApiRepository(), this)
     }
-
 
 
     override fun showError(message: CharSequence?) {

@@ -1,6 +1,5 @@
 package com.qornanali.footballclubkt.data
 
-import android.net.Uri
 import com.qornanali.footballclub_kotlin.BuildConfig
 
 object TheSportdbAPI {
@@ -13,7 +12,7 @@ object TheSportdbAPI {
         return BuildConfig.thesportdb_base_url + "${BuildConfig.thesportdb_key}/eventspastleague.php?id=${leagueId}"
     }
 
-    fun getTeamDetail(teamId: String?):String {
+    fun getTeamDetail(teamId: String?): String {
         return BuildConfig.thesportdb_base_url + "${BuildConfig.thesportdb_key}/lookupteam.php?id=${teamId}"
     }
 }
