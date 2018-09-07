@@ -4,8 +4,10 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.widget.ProgressBar
+import com.google.gson.Gson
 import com.qornanali.footballclub_kotlin.R
 import com.qornanali.footballclubkt.adapter.ListEventAdapter
+import com.qornanali.footballclubkt.data.ApiRepository
 import com.qornanali.footballclubkt.feature.BaseFragment
 import com.qornanali.footballclubkt.feature.detailevent.DisplayDetailEventActivity
 import com.qornanali.footballclubkt.model.Event
@@ -13,7 +15,9 @@ import com.qornanali.footballclubkt.util.OnItemClickListener
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
-class DisplayListEventFragment : BaseFragment<DisplayListEventFPresenter, DisplayListEventFView>(), DisplayListEventFView {
+class DisplayListEventFragment :
+        BaseFragment<DisplayListEventFPresenter, DisplayListEventFView>(),
+        DisplayListEventFView {
 
     private lateinit var rvEvents: RecyclerView
     private lateinit var progressBar: ProgressBar
@@ -21,7 +25,7 @@ class DisplayListEventFragment : BaseFragment<DisplayListEventFPresenter, Displa
     private val events = ArrayList<Event>()
 
     override fun attachPresenter(): DisplayListEventFPresenter {
-        return DisplayListEventFPresenter()
+        return DisplayListEventFPresenter(Gson(), ApiRepository(), this)
     }
 
     override fun showListEvent(data: List<Event>) {
@@ -38,9 +42,6 @@ class DisplayListEventFragment : BaseFragment<DisplayListEventFPresenter, Displa
 
         rvEvents.layoutManager = LinearLayoutManager(activity)
         rvEvents.adapter = adapter
-
-        presenter.attachView(this)
-
         presenter.loadListEvent(arguments?.getString("title"), resources.getString(R.string.last_events))
     }
 

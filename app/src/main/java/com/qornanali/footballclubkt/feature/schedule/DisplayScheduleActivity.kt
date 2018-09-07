@@ -6,15 +6,19 @@ import android.support.v4.view.ViewPager
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import com.google.gson.Gson
 import com.qornanali.footballclub_kotlin.R
 import com.qornanali.footballclubkt.adapter.SchedulePagerAdapter
+import com.qornanali.footballclubkt.data.ApiRepository
 import com.qornanali.footballclubkt.feature.BaseActivity
 import com.qornanali.footballclubkt.feature.favoritevent.DisplayFavoriteEventsActivity
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
 
-class DisplayScheduleActivity : BaseActivity<DisplayScheduleAPresenter, DisplayScheduleAView>(), DisplayScheduleAView {
+class DisplayScheduleActivity :
+        BaseActivity<DisplayScheduleAPresenter, DisplayScheduleAView>(),
+        DisplayScheduleAView {
 
     private lateinit var pagerAdapter: SchedulePagerAdapter
     private lateinit var viewPager: ViewPager
@@ -22,7 +26,7 @@ class DisplayScheduleActivity : BaseActivity<DisplayScheduleAPresenter, DisplayS
     private lateinit var tabLayout: TabLayout
 
     override fun attachPresenter(): DisplayScheduleAPresenter {
-        return DisplayScheduleAPresenter()
+        return DisplayScheduleAPresenter(Gson(), ApiRepository(), this)
     }
 
     override fun attachLayout(): Int {
@@ -37,8 +41,6 @@ class DisplayScheduleActivity : BaseActivity<DisplayScheduleAPresenter, DisplayS
         setSupportActionBar(toolbar)
         viewPager.adapter = pagerAdapter
         tabLayout.setupWithViewPager(viewPager)
-
-        presenter.attachView(this)
 
         presenter.setActionBar(resources)
 

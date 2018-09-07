@@ -5,6 +5,7 @@ import com.qornanali.footballclubkt.data.ApiRepository
 import com.qornanali.footballclubkt.data.TheSportdbAPI
 import com.qornanali.footballclubkt.model.Event
 import com.qornanali.footballclubkt.model.ResponseGetEvents
+import com.qornanali.footballclubkt.util.TestContextProvider
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -19,13 +20,14 @@ class DisplayListEventFPresenterTest {
     @Mock
     private lateinit var apiRepository: ApiRepository
     @Mock
+    private lateinit var gson: Gson
+    @Mock
     private lateinit var presenter: DisplayListEventFPresenter
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        presenter = DisplayListEventFPresenter()
-        presenter.attachView(view)
+        presenter = DisplayListEventFPresenter(gson, apiRepository, view, TestContextProvider())
     }
 
     @Test
@@ -36,11 +38,16 @@ class DisplayListEventFPresenterTest {
         val responseGetEvents = ResponseGetEvents(events)
         val idLeague = "4328"
 
-        Mockito.`when`(Gson().fromJson(ApiRepository().doRequest(TheSportdbAPI.getLastEvents(idLeague)), ResponseGetEvents::class.java))
+        Mockito.`when`(gson.fromJson(apiRepository.doRequest(TheSportdbAPI.getLastEvents(idLeague)), ResponseGetEvents::class.java))
                 .thenReturn(responseGetEvents)
 
         presenter.loadListEvent(title, eventsTypeComparator)
 
+        Mockito.verify(view).loadingData(true)
         Mockito.verify(view).showListEvent(events)
+        Mockito.verify(view).loadingData(false)
     }
+
+
+
 }

@@ -2,18 +2,13 @@ package com.qornanali.footballclubkt.feature.detailevent
 
 import com.google.gson.Gson
 import com.qornanali.footballclubkt.data.ApiRepository
-import com.qornanali.footballclubkt.data.TheSportdbAPI
-import com.qornanali.footballclubkt.feature.BaseView
-import com.qornanali.footballclubkt.model.ResponseGetTeams
-import com.qornanali.footballclubkt.model.Team
-import com.qornanali.footballclubkt.util.DateFormatter
+import com.qornanali.footballclubkt.data.SQLiteHelper
+import com.qornanali.footballclubkt.util.TestContextProvider
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
 import org.mockito.Mockito
-import org.mockito.Mockito.`when`
 import org.mockito.MockitoAnnotations
-import java.util.*
 
 class DisplayDetailEventAPresenterTest {
 
@@ -21,13 +16,17 @@ class DisplayDetailEventAPresenterTest {
     private lateinit var view: DisplayDetailEventAView
     @Mock
     private lateinit var presenter: DisplayDetailEventAPresenter
-
+    @Mock
+    private lateinit var apiRepository: ApiRepository
+    @Mock
+    private lateinit var gson: Gson
+    @Mock
+    private lateinit var db: SQLiteHelper
 
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
-        presenter = DisplayDetailEventAPresenter()
-        presenter.attachView(view)
+        presenter = DisplayDetailEventAPresenter(gson, apiRepository, view, TestContextProvider())
     }
 
     @Test
@@ -48,38 +47,9 @@ class DisplayDetailEventAPresenterTest {
 
         presenter.loadTeamsName(awayName, homeName)
 
-        Mockito.verify(view).showTeamName(homeName, awayName)
-    }
-
-    @Test
-    fun loadHomeBadge() {
-        val teams = ArrayList<Team>()
-        val idHomeTeam = "133932"
-        val responseGetTeams = ResponseGetTeams(teams)
-        val badgeUrl = "https://www.thesportsdb.com/images/media/team/badge/qtusqx1420753809.png"
-
-        `when`(Gson().fromJson(ApiRepository().doRequest(TheSportdbAPI.getTeamDetail(idHomeTeam)), ResponseGetTeams::class.java))
-                .thenReturn(responseGetTeams)
-
-        presenter.loadHomeBadge(idHomeTeam)
-
-        Mockito.verify(view).showHomeBadges(badgeUrl)
-
+        Mockito.verify(view).showTeamName(awayName, homeName)
     }
 
 
-    @Test
-    fun loadAwayBadge() {
-        val teams = ArrayList<Team>()
-        val idAwayTeam = "133632"
-        val responseGetTeams = ResponseGetTeams(teams)
-        val badgeUrl = "https://www.thesportsdb.com/images/media/team/badge/rytxyw1448813222.png"
 
-        `when`(Gson().fromJson(ApiRepository().doRequest(TheSportdbAPI.getTeamDetail(idAwayTeam)), ResponseGetTeams::class.java))
-                .thenReturn(responseGetTeams)
-
-        presenter.loadAwayBadge(idAwayTeam)
-
-        Mockito.verify(view).showHomeBadges(badgeUrl)
-    }
 }

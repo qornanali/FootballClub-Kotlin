@@ -12,34 +12,39 @@ import com.qornanali.footballclubkt.model.Event
 import com.qornanali.footballclubkt.model.FavoriteEvent
 import com.qornanali.footballclubkt.model.ResponseGetTeams
 import com.qornanali.footballclubkt.model.Statistic
+import com.qornanali.footballclubkt.util.CoroutineContextProvider
 import com.qornanali.footballclubkt.util.DateFormatter
+import kotlinx.coroutines.experimental.async
+import org.jetbrains.anko.coroutines.experimental.bg
 import org.jetbrains.anko.db.delete
 import org.jetbrains.anko.db.insert
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 
-class DisplayDetailEventAPresenter : BasePresenter<DisplayDetailEventAView>() {
+class DisplayDetailEventAPresenter(gson: Gson,
+                                   apiRepository: ApiRepository,
+                                   view: DisplayDetailEventAView,
+                                   context: CoroutineContextProvider = CoroutineContextProvider())
+    : BasePresenter<DisplayDetailEventAView>(gson, apiRepository, view, context) {
 
     fun setActionBar(resources: Resources) {
         view.displayActionBarTitle(resources.getString(R.string.my_favorites))
     }
 
-    fun loadEventDate(strDate: String?, strTime: String?){
+    fun loadEventDate(strDate: String?, strTime: String?) {
         val eventDate = DateFormatter.formatToDate(strDate + " " + strTime?.split("+")?.get(0), "dd/MM/yy HH:mm:ss")
         view.showEventDate(DateFormatter.formatToString(eventDate, "EEEE, dd MMMM yyyy HH:mm"))
     }
 
-    fun loadTeamsName(awayName : String, homeName: String){
+    fun loadTeamsName(awayName: String, homeName: String) {
         view.showTeamName(awayName, homeName)
     }
 
 
-    fun removeFromFavorite(event: Event, database: SQLiteHelper) {
+    fun removeFromFavorite(idEvent: String?, database: SQLiteHelper) {
         try {
             database.use {
                 delete(FavoriteEvent.TABLE_FAVORITEEVENT,
                         "(FIELD_IDEVENT = {value})",
-                        "value" to event.idEvent)
+                        "value" to (idEvent ?: ""))
             }
             view.successRemovedFromFavorite()
         } catch (e: SQLiteConstraintException) {
@@ -100,22 +105,22 @@ class DisplayDetailEventAPresenter : BasePresenter<DisplayDetailEventAView>() {
     }
 
     fun loadHomeBadge(idHomeTeam: String?) {
-        doAsync {
-            val data = Gson().fromJson(ApiRepository()
-                    .doRequest(TheSportdbAPI.getTeamDetail(idHomeTeam)), ResponseGetTeams::class.java)
-            uiThread {
-                view.showHomeBadges(data.teams.get(0).strTeamBadge)
+        async(context.main) {
+            val data = bg {
+                gson.fromJson(apiRepository.doRequest(TheSportdbAPI.getTeamDetail(idHomeTeam)),
+                        ResponseGetTeams::class.java)
             }
+            view.showHomeBadge(data.await().teams.get(0).strTeamBadge)
         }
     }
 
     fun loadAwayBadge(idAwayTeam: String?) {
-        doAsync {
-            val data = Gson().fromJson(ApiRepository()
-                    .doRequest(TheSportdbAPI.getTeamDetail(idAwayTeam)), ResponseGetTeams::class.java)
-            uiThread {
-                view.showAwayBadges(data.teams.get(0).strTeamBadge)
+        async(context.main) {
+            val data = bg {
+                gson.fromJson(apiRepository.doRequest(TheSportdbAPI.getTeamDetail(idAwayTeam)),
+                        ResponseGetTeams::class.java)
             }
+            view.showAwayBadge(data.await().teams.get(0).strTeamBadge)
         }
     }
 }

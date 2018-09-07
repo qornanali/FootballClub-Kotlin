@@ -1,11 +1,10 @@
 package com.qornanali.footballclubkt.feature
 
-open class BasePresenter<V : BaseView>() {
+import com.google.gson.Gson
+import com.qornanali.footballclubkt.data.ApiRepository
+import com.qornanali.footballclubkt.util.CoroutineContextProvider
 
-    lateinit var view: V
-
-    fun attachView(baseView: V) {
-        view = baseView
-    }
-
-}
+open class BasePresenter<V : BaseView>(open val gson: Gson,
+                                       open val apiRepository: ApiRepository,
+                                       open val view: V,
+                                       open val context: CoroutineContextProvider = CoroutineContextProvider())
