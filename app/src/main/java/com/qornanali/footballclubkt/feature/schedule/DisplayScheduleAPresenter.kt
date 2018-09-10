@@ -6,7 +6,8 @@ import com.google.gson.Gson
 import com.qornanali.footballclub_kotlin.R
 import com.qornanali.footballclubkt.data.ApiRepository
 import com.qornanali.footballclubkt.feature.BasePresenter
-import com.qornanali.footballclubkt.feature.listevent.DisplayListEventFragment
+import com.qornanali.footballclubkt.feature.listevent.LastEventFragment
+import com.qornanali.footballclubkt.feature.listevent.NextEventFragment
 import com.qornanali.footballclubkt.util.CoroutineContextProvider
 
 class DisplayScheduleAPresenter(gson: Gson,
@@ -26,8 +27,8 @@ class DisplayScheduleAPresenter(gson: Gson,
         titles.add(resources.getString(R.string.next_events))
         titles.add(resources.getString(R.string.last_events))
 
-        fragments.add(DisplayListEventFragment())
-        fragments.add(DisplayListEventFragment())
+        fragments.add(NextEventFragment())
+        fragments.add(LastEventFragment())
 
         view.displayTabs(fragments, titles)
     }

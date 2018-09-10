@@ -20,8 +20,6 @@ class DisplayDetailEventAPresenterTest {
     private lateinit var apiRepository: ApiRepository
     @Mock
     private lateinit var gson: Gson
-    @Mock
-    private lateinit var db: SQLiteHelper
 
     @Before
     fun setUp() {

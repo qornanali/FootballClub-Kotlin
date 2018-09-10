@@ -1,7 +1,9 @@
 package com.qornanali.footballclubkt.feature.detailevent
 
 import android.support.test.espresso.Espresso.onView
+import android.support.test.espresso.Espresso.pressBack
 import android.support.test.espresso.action.ViewActions.click
+import android.support.test.espresso.action.ViewActions.swipeLeft
 import android.support.test.espresso.assertion.ViewAssertions.matches
 import android.support.test.espresso.contrib.RecyclerViewActions
 import android.support.test.espresso.matcher.ViewMatchers.isDisplayed
@@ -17,21 +19,23 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
-class DisplayScheduleActivityTest {
+class InstrumentTest {
 
     @Rule
     @JvmField
     var activityRule = ActivityTestRule(DisplayScheduleActivity::class.java)
 
     @Test
-    fun openMyFavoriteEvent() {
-        onView(withId(R.id.m_action_favorites))
-                .check(matches(isDisplayed()))
+    fun updateMyFavorite() {
+//        onView(withId(R.id.view_pager)).check(matches(isDisplayed()))
+//        onView(withId(R.id.view_pager)).perform(swipeLeft())
+        onView(withId(R.id.rv_events_2)).check(matches(isDisplayed()))
+        onView(withId(R.id.rv_events_2)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(5))
+        onView(withId(R.id.rv_events_2)).perform(RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(5, click()))
+        onView(withId(R.id.m_action_favorites)).check(matches(isDisplayed()))
         onView(withId(R.id.m_action_favorites)).perform(click())
-        onView(withId(R.id.rv_events))
-                .check(matches(isDisplayed()))
-        onView(withId(R.id.rv_events)).perform(RecyclerViewActions.scrollToPosition<RecyclerView.ViewHolder>(2))
-        onView(withId(R.id.rv_events)).perform(
-              RecyclerViewActions.actionOnItemAtPosition<RecyclerView.ViewHolder>(2, click()))
+        pressBack()
+        onView(withId(R.id.m_action_favorites)).check(matches(isDisplayed()))
+        onView(withId(R.id.m_action_favorites)).perform(click())
     }
 }
