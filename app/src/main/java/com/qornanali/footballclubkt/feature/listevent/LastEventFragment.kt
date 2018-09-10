@@ -15,7 +15,7 @@ import com.qornanali.footballclubkt.util.OnItemClickListener
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
-class DisplayListEventFragment :
+class LastEventFragment :
         BaseFragment<DisplayListEventFPresenter, DisplayListEventFView>(),
         DisplayListEventFView {
 
