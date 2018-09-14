@@ -3,6 +3,7 @@ package com.qornanali.footballclubkt.feature.favoritevent
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.Toolbar
+import android.view.MenuItem
 import com.google.gson.Gson
 import com.qornanali.footballclub_kotlin.R
 import com.qornanali.footballclubkt.adapter.ListEventAdapter
@@ -32,6 +33,8 @@ class DisplayFavoriteEventsActivity :
         rvEvents = find(R.id.rv_events)
 
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         adapter = ListEventAdapter(events, OnItemClickListener {
             startActivity<DisplayDetailEventActivity>("event" to it)
@@ -69,5 +72,15 @@ class DisplayFavoriteEventsActivity :
 
     override fun attachLayout(): Int {
         return R.layout.activity_displayfavoriteevents
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            android.R.id.home -> finish()
+            else -> {
+                return super.onOptionsItemSelected(item)
+            }
+        }
+        return true
     }
 }

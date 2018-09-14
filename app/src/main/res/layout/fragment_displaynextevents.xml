@@ -10,7 +10,7 @@
         android:layout_centerInParent="true" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_events_2"
+        android:id="@+id/rv_next_events"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone" />

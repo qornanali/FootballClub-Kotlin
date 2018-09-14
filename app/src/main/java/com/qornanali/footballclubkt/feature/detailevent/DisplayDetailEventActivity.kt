@@ -64,6 +64,8 @@ class DisplayDetailEventActivity :
         rvStatistics.layoutManager = LinearLayoutManager(this)
         rvStatistics.adapter = adapter
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         presenter.setActionBar(resources)
         presenter.loadTeamsName(event.strAwayTeam, event.strHomeTeam)
@@ -84,7 +86,7 @@ class DisplayDetailEventActivity :
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_favorites, menu)
+        menuInflater.inflate(R.menu.menu_events, menu)
         favoriteMenu = menu?.getItem(0)
         if (checkFavorited()) {
             setMenuItemIcon(favoriteMenu, R.drawable.ic_action_star_2)
@@ -94,6 +96,7 @@ class DisplayDetailEventActivity :
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
+            android.R.id.home -> finish()
             R.id.m_action_favorites -> {
                 val statusFavorited = checkFavorited()
                 if (statusFavorited) {

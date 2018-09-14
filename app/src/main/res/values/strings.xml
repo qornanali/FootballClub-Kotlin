@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">FootballClub-Kotlin</string>
     <string name="my_favorites">My favorites</string>
+    <string name="search_teams">Search teams</string>
+    <string name="search_events">Search events</string>
     <string name="added_to_favorites">Added to favorites</string>
     <string name="removed_from_favorites">Removed from favorites</string>
 

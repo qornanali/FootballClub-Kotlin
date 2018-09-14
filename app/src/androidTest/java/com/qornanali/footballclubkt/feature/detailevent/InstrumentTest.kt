@@ -12,7 +12,7 @@ import android.support.test.runner.AndroidJUnit4
 import android.support.v7.widget.RecyclerView
 import com.qornanali.footballclub_kotlin.R.id.m_action_favorites
 import com.qornanali.footballclub_kotlin.R.id.rv_events_2
-import com.qornanali.footballclubkt.feature.home.HomeActivity
+import com.qornanali.footballclubkt.feature.leagueinfo.LeagueInfoActivity
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -23,7 +23,7 @@ class InstrumentTest {
 
     @Rule
     @JvmField
-    var activityRule = ActivityTestRule(HomeActivity::class.java)
+    var activityRule = ActivityTestRule(LeagueInfoActivity::class.java)
 
     @Test
     fun updateMyFavorite() {
