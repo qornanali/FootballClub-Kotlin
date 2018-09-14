@@ -7,6 +7,7 @@
     <string name="league_name">English Premier League</string>
     <string name="next_events">Next matches</string>
     <string name="last_events">Last matches</string>
+    <string name="teams">Teams</string>
     <string name="detail_event">Detail match</string>
     <string name="red_cards">Red cards</string>
     <string name="yellow_cards">Yellow cards</string>

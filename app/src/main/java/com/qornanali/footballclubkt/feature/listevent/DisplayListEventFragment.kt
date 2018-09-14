@@ -15,7 +15,7 @@ import com.qornanali.footballclubkt.util.OnItemClickListener
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
-class LastEventFragment :
+class DisplayListEventFragment :
         BaseFragment<DisplayListEventFPresenter, DisplayListEventFView>(),
         DisplayListEventFView {
 
@@ -34,7 +34,7 @@ class LastEventFragment :
     }
 
     override fun onInitializeViews() {
-        rvEvents = rootView.find(R.id.rv_events)
+        rvEvents = if (arguments?.getString("title").equals(resources.getString(R.string.next_events))) rootView.find(R.id.rv_events_2) else rootView.find(R.id.rv_events)
         progressBar = rootView.find(R.id.progress_bar)
         adapter = ListEventAdapter(events, OnItemClickListener {
             activity?.startActivity<DisplayDetailEventActivity>("event" to it)
@@ -42,11 +42,14 @@ class LastEventFragment :
 
         rvEvents.layoutManager = LinearLayoutManager(activity)
         rvEvents.adapter = adapter
+
+        setHasOptionsMenu(true)
+
         presenter.loadListEvent(arguments?.getString("title"), resources.getString(R.string.last_events))
     }
 
     override fun attachLayout(): Int {
-        return R.layout.fragment_displaylistevents
+        return if (arguments?.getString("title").equals(resources.getString(R.string.next_events))) R.layout.fragment_displaynextevents else R.layout.fragment_displaylastevents
     }
 
     override fun loadingData(status: Boolean) {
