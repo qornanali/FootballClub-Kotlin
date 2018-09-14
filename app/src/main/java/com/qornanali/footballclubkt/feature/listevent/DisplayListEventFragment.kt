@@ -1,7 +1,11 @@
 package com.qornanali.footballclubkt.feature.listevent
 
+import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.ProgressBar
 import com.google.gson.Gson
@@ -10,6 +14,8 @@ import com.qornanali.footballclubkt.adapter.ListEventAdapter
 import com.qornanali.footballclubkt.data.ApiRepository
 import com.qornanali.footballclubkt.feature.BaseFragment
 import com.qornanali.footballclubkt.feature.detailevent.DisplayDetailEventActivity
+import com.qornanali.footballclubkt.feature.favoritevent.DisplayFavoriteEventsActivity
+import com.qornanali.footballclubkt.feature.home.HomeActivity
 import com.qornanali.footballclubkt.model.Event
 import com.qornanali.footballclubkt.util.OnItemClickListener
 import org.jetbrains.anko.find
@@ -33,8 +39,28 @@ class DisplayListEventFragment :
         adapter.notifyDataSetChanged()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.menu_events, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.m_action_favorites -> activity?.startActivity<DisplayFavoriteEventsActivity>()
+            else -> {
+                return super.onOptionsItemSelected(item)
+            }
+        }
+        return true
+    }
+
     override fun onInitializeViews() {
-        rvEvents = if (arguments?.getString("title").equals(resources.getString(R.string.next_events))) rootView.find(R.id.rv_events_2) else rootView.find(R.id.rv_events)
+        rvEvents = if (arguments?.getString("title").equals(resources.getString(R.string.next_events))) rootView.find(R.id.rv_next_events) else rootView.find(R.id.rv_last_events)
         progressBar = rootView.find(R.id.progress_bar)
         adapter = ListEventAdapter(events, OnItemClickListener {
             activity?.startActivity<DisplayDetailEventActivity>("event" to it)
@@ -43,9 +69,7 @@ class DisplayListEventFragment :
         rvEvents.layoutManager = LinearLayoutManager(activity)
         rvEvents.adapter = adapter
 
-        setHasOptionsMenu(true)
-
-        presenter.loadListEvent(arguments?.getString("title"), resources.getString(R.string.last_events))
+        presenter.loadListEvent(arguments?.getString("title"), resources.getString(R.string.last_events),(activity as HomeActivity).league?.idLeague)
     }
 
     override fun attachLayout(): Int {

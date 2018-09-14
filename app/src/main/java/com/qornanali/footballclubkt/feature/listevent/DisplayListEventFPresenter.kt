@@ -15,9 +15,9 @@ class DisplayListEventFPresenter(gson: Gson,
                                  context: CoroutineContextProvider = CoroutineContextProvider())
     : BasePresenter<DisplayListEventFView>(gson, apiRepository, view, context) {
 
-    fun loadListEvent(title: String?, eventsTypeComparator: String) {
+    fun loadListEvent(title: String?, eventsTypeComparator: String, leagueId: String?) {
         view.loadingData(true)
-        val url = if (title.equals(eventsTypeComparator)) TheSportdbAPI.getLastEventsByLeagueId("4328") else TheSportdbAPI.getNextEventsByLeagueId("4328")
+        val url = if (title.equals(eventsTypeComparator)) TheSportdbAPI.getLastEventsByLeagueId(leagueId) else TheSportdbAPI.getNextEventsByLeagueId(leagueId)
         async(context.main) {
             val data = bg {
                 gson.fromJson(apiRepository.doRequest(url), ResponseGetEvents::class.java)

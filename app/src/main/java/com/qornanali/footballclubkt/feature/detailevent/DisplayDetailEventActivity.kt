@@ -38,7 +38,7 @@ class DisplayDetailEventActivity :
     private lateinit var tvEventHomeScore: TextView
     private lateinit var tvEventAwayScore: TextView
     private lateinit var rvStatistics: RecyclerView
-    private lateinit var event: Event
+    private var event: Event? = null
     private lateinit var adapter: ListStatisticAdapter
     private var favoriteMenu: MenuItem? = null
     private val statistics = ArrayList<Statistic>()
@@ -64,13 +64,16 @@ class DisplayDetailEventActivity :
         rvStatistics.layoutManager = LinearLayoutManager(this)
         rvStatistics.adapter = adapter
         setSupportActionBar(toolbar)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         presenter.setActionBar(resources)
-        presenter.loadTeamsName(event.strAwayTeam, event.strHomeTeam)
-        presenter.loadAwayBadge(event.idAwayTeam)
-        presenter.loadHomeBadge(event.idHomeTeam)
+        presenter.loadTeamsName(event?.strAwayTeam, event?.strHomeTeam)
+        presenter.loadEventScore(event?.intHomeScore, event?.intAwayScore)
+        presenter.loadAwayBadge(event?.idAwayTeam)
+        presenter.loadHomeBadge(event?.idHomeTeam)
         presenter.loadStatistic(event, resources)
-        presenter.loadEventDate(event.strDate, event.strTime)
+        presenter.loadEventDate(event?.strDate, event?.strTime)
     }
 
     override fun attachPresenter(): DisplayDetailEventAPresenter {
@@ -84,7 +87,7 @@ class DisplayDetailEventActivity :
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_favorites, menu)
+        menuInflater.inflate(R.menu.menu_detail_event, menu)
         favoriteMenu = menu?.getItem(0)
         if (checkFavorited()) {
             setMenuItemIcon(favoriteMenu, R.drawable.ic_action_star_2)
@@ -94,10 +97,11 @@ class DisplayDetailEventActivity :
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
+            android.R.id.home -> finish()
             R.id.m_action_favorites -> {
                 val statusFavorited = checkFavorited()
                 if (statusFavorited) {
-                    presenter.removeFromFavorite(event.idEvent, database)
+                    presenter.removeFromFavorite(event?.idEvent, database)
                 } else {
                     presenter.addToFavorite(event, database)
                 }
@@ -110,7 +114,7 @@ class DisplayDetailEventActivity :
     }
 
 
-    private fun loadImage(url : String?, ivTarget: ImageView) {
+    private fun loadImage(url: String?, ivTarget: ImageView) {
         Picasso.get().load(url).resize(150, 150).into(ivTarget)
     }
 
@@ -124,7 +128,7 @@ class DisplayDetailEventActivity :
             database.use {
                 val q = select(FavoriteEvent.TABLE_FAVORITEEVENT, FavoriteEvent.FIELD_IDEVENT)
                         .whereArgs("(FIELD_IDEVENT = {value})",
-                                "value" to event.idEvent)
+                                "value" to (event?.idEvent ?: ""))
                 val listFavorites = q.parseList(classParser<String>())
                 favorited = !listFavorites.isEmpty()
             }
@@ -134,16 +138,16 @@ class DisplayDetailEventActivity :
         return favorited
     }
 
-    override fun showTeamName(awayName: String, homeName: String) {
+    override fun showTeamName(awayName: String?, homeName: String?) {
         tvEventAwayTeam.text = awayName
         tvEventHomeTeam.text = homeName
     }
 
-    override fun showEventDate(date: String) {
+    override fun showEventDate(date: String?) {
         tvEventDate.text = date
     }
 
-    override fun displayActionBarTitle(title: String) {
+    override fun displayActionBarTitle(title: String?) {
         supportActionBar?.title = resources.getString(R.string.detail_event)
     }
 
@@ -157,7 +161,7 @@ class DisplayDetailEventActivity :
         setMenuItemIcon(favoriteMenu, R.drawable.ic_action_star_2)
     }
 
-    override fun showScores(awayScore: String, homeScore: String) {
+    override fun showScores(awayScore: String?, homeScore: String?) {
         tvEventAwayScore.text = awayScore
         tvEventHomeScore.text = homeScore
     }
@@ -171,7 +175,7 @@ class DisplayDetailEventActivity :
         loadImage(imageUrl, ivTeamAwayLogo)
     }
 
-    override fun showHomeBadge( imageUrl: String?) {
+    override fun showHomeBadge(imageUrl: String?) {
         loadImage(imageUrl, ivTeamHomeLogo)
     }
 }

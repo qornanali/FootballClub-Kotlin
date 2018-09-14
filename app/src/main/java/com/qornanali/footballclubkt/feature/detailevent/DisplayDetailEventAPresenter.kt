@@ -29,12 +29,20 @@ class DisplayDetailEventAPresenter(gson: Gson,
         view.displayActionBarTitle(resources.getString(R.string.my_favorites))
     }
 
-    fun loadEventDate(strDate: String?, strTime: String?) {
-        val eventDate = DateFormatter.formatToDate(strDate + " " + strTime?.split("+")?.get(0), "dd/MM/yy HH:mm:ss")
-        view.showEventDate(DateFormatter.formatToString(eventDate, "EEEE, dd MMMM yyyy HH:mm"))
+    fun loadEventScore(homeScore: String?, awayScore: String?) {
+        view.showScores(awayScore, homeScore)
     }
 
-    fun loadTeamsName(awayName: String, homeName: String) {
+    fun loadEventDate(strDate: String?, strTime: String?) {
+        try {
+            val eventDate = DateFormatter.formatToDate(strDate + " " + strTime?.split("+")?.get(0), "dd/MM/yy HH:mm:ss")
+            view.showEventDate(DateFormatter.formatToString(eventDate, "EEEE, dd MMMM yyyy HH:mm"))
+        }catch (e : Exception){
+
+        }
+    }
+
+    fun loadTeamsName(awayName: String?, homeName: String?) {
         view.showTeamName(awayName, homeName)
     }
 
@@ -52,37 +60,37 @@ class DisplayDetailEventAPresenter(gson: Gson,
         }
     }
 
-    fun addToFavorite(event: Event, database: SQLiteHelper) {
+    fun addToFavorite(event: Event?, database: SQLiteHelper) {
         try {
             database.use {
                 insert(FavoriteEvent.TABLE_FAVORITEEVENT,
-                        FavoriteEvent.FIELD_IDEVENT to event.idEvent,
-                        FavoriteEvent.FIELD_HOMETEAM to event.strHomeTeam,
-                        FavoriteEvent.FIELD_AWAYTEAM to event.strAwayTeam,
-                        FavoriteEvent.FIELD_HOMESCORE to event.intHomeScore,
-                        FavoriteEvent.FIELD_AWAYSCORE to event.intAwayScore,
-                        FavoriteEvent.FIELD_HOMERED to event.strHomeRedCards,
-                        FavoriteEvent.FIELD_HOMEYELLOW to event.strHomeYellowCards,
-                        FavoriteEvent.FIELD_HOMEGK to event.strHomeLineupGoalkeeper,
-                        FavoriteEvent.FIELD_HOMEDF to event.strHomeLineupDefense,
-                        FavoriteEvent.FIELD_HOMEMF to event.strHomeLineupMidfield,
-                        FavoriteEvent.FIELD_HOMEFW to event.strHomeLineupForward,
-                        FavoriteEvent.FIELD_HOMESUB to event.strHomeLineupSubstitutes,
-                        FavoriteEvent.FIELD_HOMEFORMATION to event.strHomeFormation,
-                        FavoriteEvent.FIELD_AWAYRED to event.strAwayRedCards,
-                        FavoriteEvent.FIELD_AWAYYELLOW to event.strAwayYellowCards,
-                        FavoriteEvent.FIELD_AWAYGK to event.strAwayLineupGoalkeeper,
-                        FavoriteEvent.FIELD_AWAYDF to event.strAwayLineupDefense,
-                        FavoriteEvent.FIELD_AWAYMF to event.strAwayLineupMidfield,
-                        FavoriteEvent.FIELD_AWAYFW to event.strAwayLineupForward,
-                        FavoriteEvent.FIELD_AWAYSUB to event.strAwayLineupSubstitutes,
-                        FavoriteEvent.FIELD_AWAYFORMATION to event.strAwayFormation,
-                        FavoriteEvent.FIELD_HOMESHOTS to event.intHomeShots,
-                        FavoriteEvent.FIELD_AWAYSHOTS to event.intAwayShots,
-                        FavoriteEvent.FIELD_DATE to event.strDate,
-                        FavoriteEvent.FIELD_TIME to event.strTime,
-                        FavoriteEvent.FIELD_HOMEID to event.idHomeTeam,
-                        FavoriteEvent.FIELD_AWAYID to event.idAwayTeam)
+                        FavoriteEvent.FIELD_IDEVENT to event?.idEvent,
+                        FavoriteEvent.FIELD_HOMETEAM to event?.strHomeTeam,
+                        FavoriteEvent.FIELD_AWAYTEAM to event?.strAwayTeam,
+                        FavoriteEvent.FIELD_HOMESCORE to event?.intHomeScore,
+                        FavoriteEvent.FIELD_AWAYSCORE to event?.intAwayScore,
+                        FavoriteEvent.FIELD_HOMERED to event?.strHomeRedCards,
+                        FavoriteEvent.FIELD_HOMEYELLOW to event?.strHomeYellowCards,
+                        FavoriteEvent.FIELD_HOMEGK to event?.strHomeLineupGoalkeeper,
+                        FavoriteEvent.FIELD_HOMEDF to event?.strHomeLineupDefense,
+                        FavoriteEvent.FIELD_HOMEMF to event?.strHomeLineupMidfield,
+                        FavoriteEvent.FIELD_HOMEFW to event?.strHomeLineupForward,
+                        FavoriteEvent.FIELD_HOMESUB to event?.strHomeLineupSubstitutes,
+                        FavoriteEvent.FIELD_HOMEFORMATION to event?.strHomeFormation,
+                        FavoriteEvent.FIELD_AWAYRED to event?.strAwayRedCards,
+                        FavoriteEvent.FIELD_AWAYYELLOW to event?.strAwayYellowCards,
+                        FavoriteEvent.FIELD_AWAYGK to event?.strAwayLineupGoalkeeper,
+                        FavoriteEvent.FIELD_AWAYDF to event?.strAwayLineupDefense,
+                        FavoriteEvent.FIELD_AWAYMF to event?.strAwayLineupMidfield,
+                        FavoriteEvent.FIELD_AWAYFW to event?.strAwayLineupForward,
+                        FavoriteEvent.FIELD_AWAYSUB to event?.strAwayLineupSubstitutes,
+                        FavoriteEvent.FIELD_AWAYFORMATION to event?.strAwayFormation,
+                        FavoriteEvent.FIELD_HOMESHOTS to event?.intHomeShots,
+                        FavoriteEvent.FIELD_AWAYSHOTS to event?.intAwayShots,
+                        FavoriteEvent.FIELD_DATE to event?.strDate,
+                        FavoriteEvent.FIELD_TIME to event?.strTime,
+                        FavoriteEvent.FIELD_HOMEID to event?.idHomeTeam,
+                        FavoriteEvent.FIELD_AWAYID to event?.idAwayTeam)
             }
             view.successAddedToFavorite()
         } catch (e: SQLiteConstraintException) {
@@ -90,17 +98,17 @@ class DisplayDetailEventAPresenter(gson: Gson,
         }
     }
 
-    fun loadStatistic(event: Event, resources: Resources) {
+    fun loadStatistic(event: Event?, resources: Resources) {
         val data = ArrayList<Statistic>()
-        data.add(Statistic(event.strHomeFormation, resources.getString(R.string.formation), event.strAwayFormation))
-        data.add(Statistic(event.intHomeShots, resources.getString(R.string.shots), event.intAwayShots))
-        data.add(Statistic(event.strHomeRedCards, resources.getString(R.string.red_cards), event.strAwayRedCards))
-        data.add(Statistic(event.strHomeYellowCards, resources.getString(R.string.yellow_cards), event.strAwayYellowCards))
-        data.add(Statistic(event.strHomeLineupForward, resources.getString(R.string.forward), event.strAwayLineupForward))
-        data.add(Statistic(event.strHomeLineupMidfield, resources.getString(R.string.midfielder), event.strAwayLineupMidfield))
-        data.add(Statistic(event.strHomeLineupDefense, resources.getString(R.string.defender), event.strAwayLineupDefense))
-        data.add(Statistic(event.strHomeLineupGoalkeeper, resources.getString(R.string.goalkeeper), event.strAwayLineupGoalkeeper))
-        data.add(Statistic(event.strHomeLineupSubstitutes, resources.getString(R.string.subtitutes), event.strAwayLineupSubstitutes))
+        data.add(Statistic(event?.strHomeFormation, resources.getString(R.string.formation), event?.strAwayFormation))
+        data.add(Statistic(event?.intHomeShots, resources.getString(R.string.shots), event?.intAwayShots))
+        data.add(Statistic(event?.strHomeRedCards, resources.getString(R.string.red_cards), event?.strAwayRedCards))
+        data.add(Statistic(event?.strHomeYellowCards, resources.getString(R.string.yellow_cards), event?.strAwayYellowCards))
+        data.add(Statistic(event?.strHomeLineupForward, resources.getString(R.string.forward), event?.strAwayLineupForward))
+        data.add(Statistic(event?.strHomeLineupMidfield, resources.getString(R.string.midfielder), event?.strAwayLineupMidfield))
+        data.add(Statistic(event?.strHomeLineupDefense, resources.getString(R.string.defender), event?.strAwayLineupDefense))
+        data.add(Statistic(event?.strHomeLineupGoalkeeper, resources.getString(R.string.goalkeeper), event?.strAwayLineupGoalkeeper))
+        data.add(Statistic(event?.strHomeLineupSubstitutes, resources.getString(R.string.subtitutes), event?.strAwayLineupSubstitutes))
         view.showStatistic(data)
     }
 

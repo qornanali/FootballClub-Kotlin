@@ -16,7 +16,8 @@ class ItemTeamHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
     fun bind(team: Team) {
         tvTeamName.text = team.strTeam
         team.strTeamBadge?.let {
-            Picasso.get().load(team.strTeamBadge).resize(80, 100).into(ivTeamBadge)
+            Picasso.get().load(team.strTeamBadge).resize(80, 100)
+                    .error(R.color.colorGray).into(ivTeamBadge)
         }
     }
 }

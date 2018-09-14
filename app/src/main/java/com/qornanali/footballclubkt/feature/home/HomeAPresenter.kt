@@ -16,8 +16,8 @@ class HomeAPresenter(gson: Gson,
                      context: CoroutineContextProvider = CoroutineContextProvider())
     : BasePresenter<HomeAView>(gson, apiRepository, view, context) {
 
-    fun setActionBar(resources: Resources) {
-        view.displayActionBarTitle(resources.getString(R.string.league_name))
+    fun setActionBar(title: String?) {
+        view.displayActionBarTitle(title)
     }
 
     fun setTabs(resources: Resources) {

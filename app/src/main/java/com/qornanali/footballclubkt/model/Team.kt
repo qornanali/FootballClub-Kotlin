@@ -1,6 +1,7 @@
 package com.qornanali.footballclubkt.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Team(
         @SerializedName("idTeam") val idTeam: String?,
@@ -10,15 +11,10 @@ data class Team(
         @SerializedName("intFormedYear") val intFormedYear: String?,
         @SerializedName("strManager") val strManager: String?,
         @SerializedName("strStadium") val strStadium: String?,
-        @SerializedName("strKeywords") val strKeywords: String?,
         @SerializedName("strStadiumThumb") val strStadiumThumb: String?,
         @SerializedName("strStadiumDescription") val strStadiumDescription: String?,
         @SerializedName("strStadiumLocation") val strStadiumLocation: String?,
         @SerializedName("intStadiumCapacity") val intStadiumCapacity: String?,
-        @SerializedName("strWebsite") val strWebsite: String?,
-        @SerializedName("strFacebook") val strFacebook: String?,
-        @SerializedName("strTwitter") val strTwitter: String?,
-        @SerializedName("strInstagram") val strInstagram: String?,
         @SerializedName("strDescriptionEN") val strDescriptionEN: String?,
         @SerializedName("strCountry") val strCountry: String?,
         @SerializedName("strTeamBadge") val strTeamBadge: String?,
@@ -28,6 +24,30 @@ data class Team(
         @SerializedName("strTeamFanart2") val strTeamFanart2: String?,
         @SerializedName("strTeamFanart3") val strTeamFanart3: String?,
         @SerializedName("strTeamFanart4") val strTeamFanart4: String?,
-        @SerializedName("strTeamBanner") val strTeamBanner: String?,
-        @SerializedName("strYoutube") val strYoutube: String?
-)
+        @SerializedName("strTeamBanner") val strTeamBanner: String?
+) : Serializable {
+
+    constructor(favoriteTeam: FavoriteTeam) : this(
+            favoriteTeam.idTeam,
+            favoriteTeam.strTeam,
+            favoriteTeam.strTeamShort,
+            favoriteTeam.strAlternate,
+            favoriteTeam.intFormedYear,
+            favoriteTeam.strManager,
+            favoriteTeam.strStadium,
+            favoriteTeam.strStadiumThumb,
+            favoriteTeam.strStadiumDescription,
+            favoriteTeam.strStadiumLocation,
+            favoriteTeam.intStadiumCapacity,
+            favoriteTeam.strDescriptionEN,
+            favoriteTeam.strCountry,
+            favoriteTeam.strTeamBadge,
+            favoriteTeam.strTeamJersey,
+            favoriteTeam.strTeamLogo,
+            favoriteTeam.strTeamFanart1,
+            favoriteTeam.strTeamFanart2,
+            favoriteTeam.strTeamFanart3,
+            favoriteTeam.strTeamFanart4,
+            favoriteTeam.strTeamBanner
+    )
+}

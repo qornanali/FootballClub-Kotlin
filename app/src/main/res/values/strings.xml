@@ -1,12 +1,16 @@
 <resources>
     <string name="app_name">FootballClub-Kotlin</string>
+    <string name="choose_league">Choose league</string>
     <string name="my_favorites">My favorites</string>
+    <string name="search_teams">Search teams</string>
+    <string name="search_events">Search events</string>
     <string name="added_to_favorites">Added to favorites</string>
     <string name="removed_from_favorites">Removed from favorites</string>
 
-    <string name="league_name">English Premier League</string>
     <string name="next_events">Next matches</string>
     <string name="last_events">Last matches</string>
+    <string name="info">Info</string>
+    <string name="players">Players</string>
     <string name="teams">Teams</string>
     <string name="detail_event">Detail match</string>
     <string name="red_cards">Red cards</string>
@@ -18,4 +22,14 @@
     <string name="midfielder">Midfielder</string>
     <string name="forward">Forward</string>
     <string name="subtitutes">Subtitutes</string>
+
+    <string name="shortname">Short name</string>
+    <string name="alternate">Alternate</string>
+    <string name="formedyear">Formed year</string>
+    <string name="manager">Manager</string>
+    <string name="stadium">Stadium</string>
+    <string name="location">Location</string>
+    <string name="capacity">Capacity</string>
+    <string name="country">Country</string>
+    <string name="description">Description</string>
 </resources>
