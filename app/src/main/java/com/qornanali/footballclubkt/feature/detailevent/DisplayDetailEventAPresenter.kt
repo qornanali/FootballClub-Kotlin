@@ -34,8 +34,12 @@ class DisplayDetailEventAPresenter(gson: Gson,
     }
 
     fun loadEventDate(strDate: String?, strTime: String?) {
-        val eventDate = DateFormatter.formatToDate(strDate + " " + strTime?.split("+")?.get(0), "dd/MM/yy HH:mm:ss")
-        view.showEventDate(DateFormatter.formatToString(eventDate, "EEEE, dd MMMM yyyy HH:mm"))
+        try {
+            val eventDate = DateFormatter.formatToDate(strDate + " " + strTime?.split("+")?.get(0), "dd/MM/yy HH:mm:ss")
+            view.showEventDate(DateFormatter.formatToString(eventDate, "EEEE, dd MMMM yyyy HH:mm"))
+        }catch (e : Exception){
+
+        }
     }
 
     fun loadTeamsName(awayName: String?, homeName: String?) {

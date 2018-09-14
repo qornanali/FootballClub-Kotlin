@@ -87,7 +87,7 @@ class DisplayDetailEventActivity :
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_events, menu)
+        menuInflater.inflate(R.menu.menu_detail_event, menu)
         favoriteMenu = menu?.getItem(0)
         if (checkFavorited()) {
             setMenuItemIcon(favoriteMenu, R.drawable.ic_action_star_2)

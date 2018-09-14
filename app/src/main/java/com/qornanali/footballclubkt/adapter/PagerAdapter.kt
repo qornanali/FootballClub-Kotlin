@@ -5,7 +5,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentStatePagerAdapter
 
-class SchedulePagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
+class PagerAdapter(fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
 
     val fragments = ArrayList<Fragment>()
     val fragmentsTitles = ArrayList<String>()
