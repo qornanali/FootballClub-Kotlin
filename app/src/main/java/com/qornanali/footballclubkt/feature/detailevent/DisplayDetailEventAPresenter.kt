@@ -107,7 +107,7 @@ class DisplayDetailEventAPresenter(gson: Gson,
     fun loadHomeBadge(idHomeTeam: String?) {
         async(context.main) {
             val data = bg {
-                gson.fromJson(apiRepository.doRequest(TheSportdbAPI.getTeamDetail(idHomeTeam)),
+                gson.fromJson(apiRepository.doRequest(TheSportdbAPI.getTeamById(idHomeTeam)),
                         ResponseGetTeams::class.java)
             }
             view.showHomeBadge(data.await().teams.get(0).strTeamBadge)
@@ -117,7 +117,7 @@ class DisplayDetailEventAPresenter(gson: Gson,
     fun loadAwayBadge(idAwayTeam: String?) {
         async(context.main) {
             val data = bg {
-                gson.fromJson(apiRepository.doRequest(TheSportdbAPI.getTeamDetail(idAwayTeam)),
+                gson.fromJson(apiRepository.doRequest(TheSportdbAPI.getTeamById(idAwayTeam)),
                         ResponseGetTeams::class.java)
             }
             view.showAwayBadge(data.await().teams.get(0).strTeamBadge)

@@ -38,7 +38,7 @@ class DisplayListEventFPresenterTest {
         val responseGetEvents = ResponseGetEvents(events)
         val idLeague = "4328"
 
-        Mockito.`when`(gson.fromJson(apiRepository.doRequest(TheSportdbAPI.getLastEvents(idLeague)), ResponseGetEvents::class.java))
+        Mockito.`when`(gson.fromJson(apiRepository.doRequest(TheSportdbAPI.getLastEventsByLeagueId(idLeague)), ResponseGetEvents::class.java))
                 .thenReturn(responseGetEvents)
 
         presenter.loadListEvent(title, eventsTypeComparator)

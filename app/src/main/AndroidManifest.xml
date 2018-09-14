@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.qornanali.footballclubkt.feature.schedule.DisplayScheduleActivity">
+        <activity android:name="com.qornanali.footballclubkt.feature.home.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

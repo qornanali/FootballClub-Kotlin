@@ -17,7 +17,7 @@ class DisplayListEventFPresenter(gson: Gson,
 
     fun loadListEvent(title: String?, eventsTypeComparator: String) {
         view.loadingData(true)
-        val url = if (title.equals(eventsTypeComparator)) TheSportdbAPI.getLastEvents("4328") else TheSportdbAPI.getNextEvents("4328")
+        val url = if (title.equals(eventsTypeComparator)) TheSportdbAPI.getLastEventsByLeagueId("4328") else TheSportdbAPI.getNextEventsByLeagueId("4328")
         async(context.main) {
             val data = bg {
                 gson.fromJson(apiRepository.doRequest(url), ResponseGetEvents::class.java)

@@ -1,4 +1,4 @@
-package com.qornanali.footballclubkt.feature.schedule
+package com.qornanali.footballclubkt.feature.home
 
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
@@ -16,21 +16,21 @@ import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
 
 
-class DisplayScheduleActivity :
-        BaseActivity<DisplayScheduleAPresenter, DisplayScheduleAView>(),
-        DisplayScheduleAView {
+class HomeActivity :
+        BaseActivity<HomeAPresenter, HomeAView>(),
+        HomeAView {
 
     private lateinit var pagerAdapter: SchedulePagerAdapter
     private lateinit var viewPager: ViewPager
     private lateinit var toolbar: Toolbar
     private lateinit var tabLayout: TabLayout
 
-    override fun attachPresenter(): DisplayScheduleAPresenter {
-        return DisplayScheduleAPresenter(Gson(), ApiRepository(), this)
+    override fun attachPresenter(): HomeAPresenter {
+        return HomeAPresenter(Gson(), ApiRepository(), this)
     }
 
     override fun attachLayout(): Int {
-        return R.layout.activity_displayschedule
+        return R.layout.activity_home
     }
 
     override fun onInitializeViews() {
