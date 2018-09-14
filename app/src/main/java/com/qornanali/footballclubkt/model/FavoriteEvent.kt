@@ -60,7 +60,5 @@ data class FavoriteEvent(
         const val FIELD_TIME: String = "FIELD_TIME"
         const val FIELD_HOMEID: String = "FIELD_HOMEID"
         const val FIELD_AWAYID: String = "FIELD_AWAYID"
-        const val FIELD_HOMEBADGE: String = "FIELD_HOMEBADGE"
-        const val FIELD_AWAYBADGE: String = "FIELD_AWAYBADGE"
     }
 }

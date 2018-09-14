@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.qornanali.footballclubkt.feature.leagueinfo.LeagueInfoActivity">
+        <activity android:name="com.qornanali.footballclubkt.feature.listleague.DisplayListLeagueActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,6 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.qornanali.footballclubkt.feature.detailevent.DisplayDetailEventActivity" />
+        <activity android:name="com.qornanali.footballclubkt.feature.home.HomeActivity" />
         <activity android:name="com.qornanali.footballclubkt.feature.favoritevent.DisplayFavoriteEventsActivity" />
     </application>
 

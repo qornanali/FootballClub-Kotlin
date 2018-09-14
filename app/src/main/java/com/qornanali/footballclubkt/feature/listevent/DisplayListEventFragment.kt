@@ -15,6 +15,7 @@ import com.qornanali.footballclubkt.data.ApiRepository
 import com.qornanali.footballclubkt.feature.BaseFragment
 import com.qornanali.footballclubkt.feature.detailevent.DisplayDetailEventActivity
 import com.qornanali.footballclubkt.feature.favoritevent.DisplayFavoriteEventsActivity
+import com.qornanali.footballclubkt.feature.home.HomeActivity
 import com.qornanali.footballclubkt.model.Event
 import com.qornanali.footballclubkt.util.OnItemClickListener
 import org.jetbrains.anko.find
@@ -68,7 +69,7 @@ class DisplayListEventFragment :
         rvEvents.layoutManager = LinearLayoutManager(activity)
         rvEvents.adapter = adapter
 
-        presenter.loadListEvent(arguments?.getString("title"), resources.getString(R.string.last_events))
+        presenter.loadListEvent(arguments?.getString("title"), resources.getString(R.string.last_events),(activity as HomeActivity).league?.idLeague)
     }
 
     override fun attachLayout(): Int {

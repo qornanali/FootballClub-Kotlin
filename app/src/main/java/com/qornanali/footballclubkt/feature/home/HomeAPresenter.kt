@@ -1,4 +1,4 @@
-package com.qornanali.footballclubkt.feature.leagueinfo
+package com.qornanali.footballclubkt.feature.home
 
 import android.content.res.Resources
 import android.support.v4.app.Fragment
@@ -10,14 +10,14 @@ import com.qornanali.footballclubkt.feature.listevent.DisplayListEventFragment
 import com.qornanali.footballclubkt.feature.listteam.DisplayListTeamFragment
 import com.qornanali.footballclubkt.util.CoroutineContextProvider
 
-class LeagueInfoAPresenter(gson: Gson,
-                           apiRepository: ApiRepository,
-                           view: LeagueInfoAView,
-                           context: CoroutineContextProvider = CoroutineContextProvider())
-    : BasePresenter<LeagueInfoAView>(gson, apiRepository, view, context) {
+class HomeAPresenter(gson: Gson,
+                     apiRepository: ApiRepository,
+                     view: HomeAView,
+                     context: CoroutineContextProvider = CoroutineContextProvider())
+    : BasePresenter<HomeAView>(gson, apiRepository, view, context) {
 
-    fun setActionBar(resources: Resources) {
-        view.displayActionBarTitle(resources.getString(R.string.league_name))
+    fun setActionBar(title: String?) {
+        view.displayActionBarTitle(title)
     }
 
     fun setTabs(resources: Resources) {

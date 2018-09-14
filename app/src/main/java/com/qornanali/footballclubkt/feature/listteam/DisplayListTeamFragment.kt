@@ -14,6 +14,7 @@ import com.qornanali.footballclubkt.adapter.ListTeamAdapter
 import com.qornanali.footballclubkt.data.ApiRepository
 import com.qornanali.footballclubkt.feature.BaseFragment
 import com.qornanali.footballclubkt.feature.favoritevent.DisplayFavoriteEventsActivity
+import com.qornanali.footballclubkt.feature.home.HomeActivity
 import com.qornanali.footballclubkt.model.Team
 import org.jetbrains.anko.find
 import org.jetbrains.anko.startActivity
@@ -46,7 +47,7 @@ class DisplayListTeamFragment :
 
         setHasOptionsMenu(true)
 
-        presenter.loadListTeam(resources.getString(R.string.league_name))
+        presenter.loadListTeam((activity as HomeActivity).league?.strLeague)
     }
 
     override fun attachLayout(): Int {

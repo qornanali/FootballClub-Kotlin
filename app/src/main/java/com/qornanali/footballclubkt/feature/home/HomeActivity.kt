@@ -1,37 +1,40 @@
-package com.qornanali.footballclubkt.feature.leagueinfo
+package com.qornanali.footballclubkt.feature.home
 
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
 import android.support.v4.view.ViewPager
 import android.support.v7.widget.Toolbar
-import android.view.Menu
 import android.view.MenuItem
 import com.google.gson.Gson
 import com.qornanali.footballclub_kotlin.R
 import com.qornanali.footballclubkt.adapter.SchedulePagerAdapter
 import com.qornanali.footballclubkt.data.ApiRepository
 import com.qornanali.footballclubkt.feature.BaseActivity
+import com.qornanali.footballclubkt.model.League
 import org.jetbrains.anko.find
 
 
-class LeagueInfoActivity :
-        BaseActivity<LeagueInfoAPresenter, LeagueInfoAView>(),
-        LeagueInfoAView {
+class HomeActivity :
+        BaseActivity<HomeAPresenter, HomeAView>(),
+        HomeAView {
 
     private lateinit var pagerAdapter: SchedulePagerAdapter
     private lateinit var viewPager: ViewPager
     private lateinit var toolbar: Toolbar
     private lateinit var tabLayout: TabLayout
+    var league: League? = null
 
-    override fun attachPresenter(): LeagueInfoAPresenter {
-        return LeagueInfoAPresenter(Gson(), ApiRepository(), this)
+    override fun attachPresenter(): HomeAPresenter {
+        return HomeAPresenter(Gson(), ApiRepository(), this)
     }
 
     override fun attachLayout(): Int {
-        return R.layout.activity_leagueinfo
+        return R.layout.activity_home
     }
 
     override fun onInitializeViews() {
+        league = intent.extras.getSerializable("league") as League
+
         toolbar = find(R.id.toolbar)
         viewPager = find(R.id.view_pager)
         tabLayout = find(R.id.tab_layout)
@@ -43,7 +46,7 @@ class LeagueInfoActivity :
         viewPager.adapter = pagerAdapter
         tabLayout.setupWithViewPager(viewPager)
 
-        presenter.setActionBar(resources)
+        presenter.setActionBar(league?.strLeague ?: resources.getString(R.string.app_name))
 
         presenter.setTabs(resources)
     }
@@ -66,7 +69,7 @@ class LeagueInfoActivity :
         pagerAdapter.notifyDataSetChanged()
     }
 
-    override fun displayActionBarTitle(title: String) {
+    override fun displayActionBarTitle(title: String?) {
         supportActionBar?.title = title
     }
 

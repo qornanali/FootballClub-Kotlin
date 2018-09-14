@@ -16,20 +16,24 @@ object TheSportdbAPI {
         return BuildConfig.thesportdb_base_url + "${BuildConfig.thesportdb_key}/lookupteam.php?id=${teamId}"
     }
 
-    fun getTeamsByName(teamName: String?): String {
+    fun searchTeamsByName(teamName: String?): String {
         return BuildConfig.thesportdb_base_url + "${BuildConfig.thesportdb_key}/searchteams.php?t=${teamName}"
     }
 
-    fun geEventsByName(eventName: String?): String {
+    fun searchEventsByName(eventName: String?): String {
         return BuildConfig.thesportdb_base_url + "${BuildConfig.thesportdb_key}/searchevents.php?e=${eventName}"
     }
 
     fun getLeagues(): String {
-        return BuildConfig.thesportdb_base_url + "${BuildConfig.thesportdb_key}/all_leagues.php"
+        return BuildConfig.thesportdb_base_url + "${BuildConfig.thesportdb_key}/search_all_leagues.php?s=Soccer"
     }
 
     fun getTeamsByLeagueName(leagueName: String?): String {
         return BuildConfig.thesportdb_base_url + "${BuildConfig.thesportdb_key}/search_all_teams.php?l=${leagueName}"
+    }
+
+    fun getPlayersByTeamId(teamId: String?): String {
+        return BuildConfig.thesportdb_base_url + "${BuildConfig.thesportdb_key}/lookup_all_players.php?id=${teamId}"
     }
 }
 

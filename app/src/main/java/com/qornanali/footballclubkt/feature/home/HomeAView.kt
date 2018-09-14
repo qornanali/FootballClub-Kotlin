@@ -1,10 +1,10 @@
-package com.qornanali.footballclubkt.feature.leagueinfo
+package com.qornanali.footballclubkt.feature.home
 
 import android.support.v4.app.Fragment
 import com.qornanali.footballclubkt.feature.BaseView
 
-interface LeagueInfoAView : BaseView {
+interface HomeAView : BaseView {
 
-    fun displayActionBarTitle(title: String)
+    fun displayActionBarTitle(title: String?)
     fun displayTabs(fragments: List<Fragment>, titles: List<String>)
 }

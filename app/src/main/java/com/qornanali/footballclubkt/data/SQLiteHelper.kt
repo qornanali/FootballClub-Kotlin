@@ -3,6 +3,7 @@ package com.qornanali.footballclubkt.data
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import com.qornanali.footballclubkt.model.FavoriteEvent
+import com.qornanali.footballclubkt.model.FavoriteTeam
 import org.jetbrains.anko.db.*
 
 class SQLiteHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "footballclubkt.db", null, 1) {
@@ -49,10 +50,36 @@ class SQLiteHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "footballclubkt.
                 FavoriteEvent.FIELD_HOMEID to TEXT,
                 FavoriteEvent.FIELD_AWAYID to TEXT
         )
+        db.createTable(FavoriteTeam.TABLE_FAVORITETEAM, true,
+                FavoriteTeam.ID to INTEGER + PRIMARY_KEY + AUTOINCREMENT,
+                FavoriteTeam.FIELD_IDTEAM to TEXT + UNIQUE,
+                FavoriteTeam.FIELD_NAME to TEXT,
+                FavoriteTeam.FIELD_SHORTNAME to TEXT,
+                FavoriteTeam.FIELD_ALTERNATE to TEXT,
+                FavoriteTeam.FIELD_FORMEDYEAR to TEXT,
+                FavoriteTeam.FIELD_MANAGER to TEXT,
+                FavoriteTeam.FIELD_STADIUM to TEXT,
+                FavoriteTeam.FIELD_STADIUMTHUMB to TEXT,
+                FavoriteTeam.FIELD_STADIUMDESC to TEXT,
+                FavoriteTeam.FIELD_STADIUMLOCATION to TEXT,
+                FavoriteTeam.FIELD_STADIUMCAPACITY to TEXT,
+                FavoriteTeam.FIELD_STADIUMCAPACITY to TEXT,
+                FavoriteTeam.FIELD_DESCRIPTION to TEXT,
+                FavoriteTeam.FIELD_COUNTRY to TEXT,
+                FavoriteTeam.FIELD_BADGE to TEXT,
+                FavoriteTeam.FIELD_JERSEY to TEXT,
+                FavoriteTeam.FIELD_LOGO to TEXT,
+                FavoriteTeam.FIELD_FANART1 to TEXT,
+                FavoriteTeam.FIELD_FANART2 to TEXT,
+                FavoriteTeam.FIELD_FANART3 to TEXT,
+                FavoriteTeam.FIELD_FANART4 to TEXT,
+                FavoriteTeam.FIELD_BANNER to TEXT
+        )
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.dropTable(FavoriteEvent.TABLE_FAVORITEEVENT, true)
+        db.dropTable(FavoriteTeam.TABLE_FAVORITETEAM, true)
     }
 }
 
