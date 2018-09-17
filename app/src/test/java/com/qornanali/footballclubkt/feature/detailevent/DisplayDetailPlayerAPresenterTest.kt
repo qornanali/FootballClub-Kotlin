@@ -10,7 +10,7 @@ import org.mockito.Mock
 import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
 
-class DisplayDetailEventAPresenterTest {
+class DisplayDetailPlayerAPresenterTest {
 
     @Mock
     private lateinit var view: DisplayDetailEventAView

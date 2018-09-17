@@ -13,6 +13,7 @@ import com.qornanali.footballclub_kotlin.R
 import com.qornanali.footballclubkt.adapter.ListPlayerAdapter
 import com.qornanali.footballclubkt.data.ApiRepository
 import com.qornanali.footballclubkt.feature.BaseFragment
+import com.qornanali.footballclubkt.feature.detailplayer.DisplayDetailPlayerActivity
 import com.qornanali.footballclubkt.feature.detailteam.DetailTeamActivity
 import com.qornanali.footballclubkt.feature.favoritevent.DisplayFavoriteEventsActivity
 import com.qornanali.footballclubkt.model.Player
@@ -42,7 +43,7 @@ class DisplayListPlayerFragment :
         rvPlayers = rootView.find(R.id.rv_players)
         progressBar = rootView.find(R.id.progress_bar)
         adapter = ListPlayerAdapter(players, OnItemClickListener {
-            //activity?.startActivity<DetailTeamActivity>("team" to it)
+            activity?.startActivity<DisplayDetailPlayerActivity>("player" to it)
         })
 
         rvPlayers.layoutManager = LinearLayoutManager(activity)

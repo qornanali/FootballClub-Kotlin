@@ -32,4 +32,11 @@
     <string name="capacity">Capacity</string>
     <string name="country">Country</string>
     <string name="description">Description</string>
+
+    <string name="signed">Signed</string>
+    <string name="team">Team</string>
+    <string name="wage">Wage</string>
+    <string name="position">Position</string>
+    <string name="height">Height</string>
+    <string name="weight">Weight</string>
 </resources>
