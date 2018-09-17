@@ -36,7 +36,7 @@ class InfoTeamFragment :
         ivFanart1 = rootView.find(R.id.iv_team_fanart_1)
         ivFanart2 = rootView.find(R.id.iv_team_fanart_2)
 
-        presenter.loadTeamInfo((activity as DetailTeamActivity).team)
+        presenter.loadTeamInfo((activity as DisplayDetailTeamActivity).team)
     }
 
     override fun attachPresenter(): InfoTeamFPresenter {

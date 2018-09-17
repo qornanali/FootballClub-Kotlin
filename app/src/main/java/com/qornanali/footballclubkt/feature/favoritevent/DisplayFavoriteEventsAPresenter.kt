@@ -19,7 +19,7 @@ class DisplayFavoriteEventsAPresenter(gson: Gson,
     : BasePresenter<DisplayFavoriteEventsAView>(gson, apiRepository, view, context) {
 
     fun setActionBar(resources: Resources) {
-        view.displayActionBarTitle(resources.getString(R.string.my_favorites))
+        view.displayActionBarTitle(resources.getString(R.string.my_event_favorites))
     }
 
     fun loadFavoriteEvents(database: SQLiteHelper) {

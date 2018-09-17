@@ -13,8 +13,8 @@ import com.qornanali.footballclub_kotlin.R
 import com.qornanali.footballclubkt.adapter.ListTeamAdapter
 import com.qornanali.footballclubkt.data.ApiRepository
 import com.qornanali.footballclubkt.feature.BaseFragment
-import com.qornanali.footballclubkt.feature.detailteam.DetailTeamActivity
-import com.qornanali.footballclubkt.feature.favoritevent.DisplayFavoriteEventsActivity
+import com.qornanali.footballclubkt.feature.detailteam.DisplayDetailTeamActivity
+import com.qornanali.footballclubkt.feature.favoriteteam.DisplayFavoriteTeamActivity
 import com.qornanali.footballclubkt.feature.home.HomeActivity
 import com.qornanali.footballclubkt.model.Team
 import com.qornanali.footballclubkt.util.OnItemClickListener
@@ -43,7 +43,7 @@ class DisplayListTeamFragment :
         rvEvents = rootView.find(R.id.rv_teams)
         progressBar = rootView.find(R.id.progress_bar)
         adapter = ListTeamAdapter(teams, OnItemClickListener {
-            activity?.startActivity<DetailTeamActivity>("team" to it)
+            activity?.startActivity<DisplayDetailTeamActivity>("team" to it)
         })
 
         rvEvents.layoutManager = GridLayoutManager(activity, 3)
@@ -78,7 +78,7 @@ class DisplayListTeamFragment :
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.m_action_favorites -> activity?.startActivity<DisplayFavoriteEventsActivity>()
+            R.id.m_action_favorites -> activity?.startActivity<DisplayFavoriteTeamActivity>()
             else -> {
                 return super.onOptionsItemSelected(item)
             }

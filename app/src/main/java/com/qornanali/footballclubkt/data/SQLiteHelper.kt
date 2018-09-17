@@ -63,7 +63,6 @@ class SQLiteHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "footballclubkt.
                 FavoriteTeam.FIELD_STADIUMDESC to TEXT,
                 FavoriteTeam.FIELD_STADIUMLOCATION to TEXT,
                 FavoriteTeam.FIELD_STADIUMCAPACITY to TEXT,
-                FavoriteTeam.FIELD_STADIUMCAPACITY to TEXT,
                 FavoriteTeam.FIELD_DESCRIPTION to TEXT,
                 FavoriteTeam.FIELD_COUNTRY to TEXT,
                 FavoriteTeam.FIELD_BADGE to TEXT,
@@ -80,6 +79,7 @@ class SQLiteHelper(ctx: Context) : ManagedSQLiteOpenHelper(ctx, "footballclubkt.
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
         db.dropTable(FavoriteEvent.TABLE_FAVORITEEVENT, true)
         db.dropTable(FavoriteTeam.TABLE_FAVORITETEAM, true)
+        onCreate(db)
     }
 }
 
