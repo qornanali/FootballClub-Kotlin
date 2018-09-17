@@ -1,6 +1,7 @@
 package com.qornanali.footballclubkt.model
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Player(
         @SerializedName("idPlayer") val idPlayer: String?,
@@ -24,4 +25,4 @@ data class Player(
         @SerializedName("strFanart2") val strFanart2: String?,
         @SerializedName("strFanart3") val strFanart3: String?,
         @SerializedName("strFanart4") val strFanart4: String?
-)
+) : Serializable

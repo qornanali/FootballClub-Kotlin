@@ -16,7 +16,7 @@ class InfoTeamFPresenter(gson: Gson,
         view.displayCountry(team?.strCountry)
         view.displayManager(team?.strManager)
         view.displayDescription(team?.strDescriptionEN)
-        view.displayName(team?.strTeamShort, team?.strAlternate)
+        view.displayName(team?.strTeam, team?.strTeamShort, team?.strAlternate)
         view.loadFanart(team?.strTeamFanart1, team?.strTeamFanart3)
         view.loadStadiumImage(team?.strStadiumThumb)
         view.displayStadium(team?.strStadiumDescription)

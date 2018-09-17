@@ -7,7 +7,6 @@ import com.qornanali.footballclub_kotlin.R
 import com.qornanali.footballclubkt.data.ApiRepository
 import com.qornanali.footballclubkt.feature.BaseFragment
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.item_event.*
 import org.jetbrains.anko.find
 
 class InfoTeamFragment :
@@ -56,8 +55,8 @@ class InfoTeamFragment :
         tvCountry.text = "${resources.getString(R.string.country)} : ${country}"
     }
 
-    override fun displayName(shortName: String?, alternate: String?) {
-        tvName.text = "${resources.getString(R.string.shortname)}/${resources.getString(R.string.alternate)} : ${shortName}/${alternate}"
+    override fun displayName(fullName: String?, shortName: String?, alternate: String?) {
+        tvName.text = "${fullName}\n${resources.getString(R.string.shortname)}/${resources.getString(R.string.alternate)} : ${shortName}/${alternate}"
     }
 
     override fun displayStadium(stadium: String?) {
