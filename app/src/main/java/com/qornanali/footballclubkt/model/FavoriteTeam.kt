@@ -13,10 +13,6 @@ data class FavoriteTeam(
         val strStadiumDescription: String?,
         val strStadiumLocation: String?,
         val intStadiumCapacity: String?,
-        val strWebsite: String?,
-        val strFacebook: String?,
-        val strTwitter: String?,
-        val strInstagram: String?,
         val strDescriptionEN: String?,
         val strCountry: String?,
         val strTeamBadge: String?,
@@ -26,8 +22,7 @@ data class FavoriteTeam(
         val strTeamFanart2: String?,
         val strTeamFanart3: String?,
         val strTeamFanart4: String?,
-        val strTeamBanner: String?,
-        val strYoutube: String?) {
+        val strTeamBanner: String?) {
 
     companion object {
         const val TABLE_FAVORITETEAM: String = "TABLE_FAVORITETEAM"

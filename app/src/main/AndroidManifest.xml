@@ -21,7 +21,8 @@
         <activity android:name="com.qornanali.footballclubkt.feature.detailevent.DisplayDetailEventActivity" />
         <activity android:name="com.qornanali.footballclubkt.feature.home.HomeActivity" />
         <activity android:name="com.qornanali.footballclubkt.feature.favoritevent.DisplayFavoriteEventsActivity" />
-        <activity android:name="com.qornanali.footballclubkt.feature.detailteam.DetailTeamActivity" />
+        <activity android:name="com.qornanali.footballclubkt.feature.favoriteteam.DisplayFavoriteTeamActivity" />
+        <activity android:name="com.qornanali.footballclubkt.feature.detailteam.DisplayDetailTeamActivity" />
         <activity android:name="com.qornanali.footballclubkt.feature.detailplayer.DisplayDetailPlayerActivity" />
     </application>
 
