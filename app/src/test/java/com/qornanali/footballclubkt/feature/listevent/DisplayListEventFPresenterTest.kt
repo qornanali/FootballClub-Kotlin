@@ -33,15 +33,16 @@ class DisplayListEventFPresenterTest {
     @Test
     fun loadListEvent() {
         val events = ArrayList<Event>()
+        val event = ArrayList<Event>()
         val eventsTypeComparator = "Last matches"
         val title = "Last matches"
-        val responseGetEvents = ResponseGetEvents(events)
+        val responseGetEvents = ResponseGetEvents(events, event)
         val idLeague = "4328"
 
         Mockito.`when`(gson.fromJson(apiRepository.doRequest(TheSportdbAPI.getLastEventsByLeagueId(idLeague)), ResponseGetEvents::class.java))
                 .thenReturn(responseGetEvents)
 
-        presenter.loadListEvent(title, eventsTypeComparator)
+        presenter.loadListEvent(title, eventsTypeComparator, idLeague)
 
         Mockito.verify(view).loadingData(true)
         Mockito.verify(view).showListEvent(events)
