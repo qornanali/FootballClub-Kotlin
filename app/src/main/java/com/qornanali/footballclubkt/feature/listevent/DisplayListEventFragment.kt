@@ -16,6 +16,7 @@ import com.qornanali.footballclubkt.feature.BaseFragment
 import com.qornanali.footballclubkt.feature.detailevent.DisplayDetailEventActivity
 import com.qornanali.footballclubkt.feature.favoritevent.DisplayFavoriteEventsActivity
 import com.qornanali.footballclubkt.feature.home.HomeActivity
+import com.qornanali.footballclubkt.feature.searchevent.SearchEventsActivity
 import com.qornanali.footballclubkt.model.Event
 import com.qornanali.footballclubkt.util.OnItemClickListener
 import org.jetbrains.anko.find
@@ -52,6 +53,7 @@ class DisplayListEventFragment :
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
             R.id.m_action_favorites -> activity?.startActivity<DisplayFavoriteEventsActivity>()
+            R.id.m_action_search -> activity?.startActivity<SearchEventsActivity>()
             else -> {
                 return super.onOptionsItemSelected(item)
             }
