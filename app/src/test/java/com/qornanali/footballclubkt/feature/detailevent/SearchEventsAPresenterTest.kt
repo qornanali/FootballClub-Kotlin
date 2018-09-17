@@ -27,6 +27,7 @@ class SearchEventsAPresenterTest {
         presenter = DisplayDetailEventAPresenter(gson, apiRepository, view, TestContextProvider())
     }
 
+
     @Test
     fun loadEventDate() {
         val strDate = "15/09/18"
