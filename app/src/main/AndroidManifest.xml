@@ -24,6 +24,8 @@
         <activity android:name="com.qornanali.footballclubkt.feature.favoriteteam.DisplayFavoriteTeamActivity" />
         <activity android:name="com.qornanali.footballclubkt.feature.detailteam.DisplayDetailTeamActivity" />
         <activity android:name="com.qornanali.footballclubkt.feature.detailplayer.DisplayDetailPlayerActivity" />
+        <activity android:name="com.qornanali.footballclubkt.feature.searchteam.SearchTeamsActivity" />
+        <activity android:name="com.qornanali.footballclubkt.feature.searchevent.SearchEventsActivity" />
     </application>
 
 </manifest>
